@@ -5,6 +5,23 @@ import React from "react";
 
 const Sidebar = ({ navItems }) => {
   const pathname = usePathname();
+
+  const handleLogout = async () => {
+    // try{
+    //   // await fetch(`${SERVER_IP}/api/logout`, {
+    //   //   method: "POST",
+    //   //   headers: {
+    //   //     "Content-Type": "application/json",
+    //   //   }
+    //   // });
+      // localStorage.clear();
+      window.location.href = "/";
+    // } catch (error) {
+    //   console.error(err);
+    //   setError(msg);
+    // }
+  }
+
   return (
     <aside className="w-[250px] bg-brand-lemon-yellow sticky top-0 pt-[140px] pb-8 h-screen pl-6 overflow-auto flex flex-col justify-between">
       <div className="flex flex-col gap-4">
@@ -36,7 +53,7 @@ const Sidebar = ({ navItems }) => {
             d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m0-3-3-3m0 0-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
           />
         </svg>
-        <p className="font-heading font-bold uppercase text-3xl">Logout</p>
+        <p className="font-heading font-bold uppercase text-3xl" onClick={handleLogout}>Logout</p>
       </div>
     </aside>
   );

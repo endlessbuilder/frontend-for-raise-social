@@ -1,4 +1,5 @@
 import React from "react";
+import { FSERVER_IP } from "../../utils/constants";
 
 const CampaignCard = (props) => {
   const { imgUrl, title, amount, type } = props;
@@ -10,7 +11,7 @@ const CampaignCard = (props) => {
       <div className="flex overflow-hidden relative flex-col w-full">
         <img
           loading="lazy"
-          src={`http://localhost:5004/api/file/download/` + imgUrl}
+          src={`${FSERVER_IP}/api/file/download/` + imgUrl}
           className="object-cover w-full aspect-[1.08]"
         />
       </div>

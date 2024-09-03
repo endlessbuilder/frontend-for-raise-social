@@ -4,6 +4,7 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import Link from "next/link";
 import React, { useState } from "react";
+import { SERVER_IP } from "../../../utils/constants";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const Page = () => {
     setError(null); // Clear previous errors
 
     try {
-      const response = await fetch("http://192.168.146.191:5005/api/login", {
+      const response = await fetch(`${SERVER_IP}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,6 +26,8 @@ const Page = () => {
           password,
         }),
       });
+
+      debugger
 
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {

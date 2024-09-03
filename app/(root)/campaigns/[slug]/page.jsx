@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import CampaignDetailsComponent from "./campaignDetailsComponent";
 import axios from "axios";
+import { SERVER_IP } from "../../../../utils/constants";
 
 const Page = ({ params }) => {
   const [campaigns, setCampaigns] = useState([]);
@@ -11,7 +12,7 @@ const Page = ({ params }) => {
     const fetchData = async () => {
       try {
         const campaignsRes = await axios.get(
-          `http://localhost:5005/api/campaign/${params}`,
+          `${SERVER_IP}/api/campaign/${params}`,
         );
         setCampaigns(campaignsRes.data.data);
         console.log("Fetched Campaigns:", campaigns);

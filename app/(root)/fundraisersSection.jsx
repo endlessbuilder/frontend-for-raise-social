@@ -6,6 +6,7 @@ import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { SERVER_IP } from "../../utils/constants";
 
 const FundraisersSection = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -16,7 +17,7 @@ const FundraisersSection = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.146.191:5005/api/campaign",
+          `${SERVER_IP}/api/campaign`,
         );
         setCampaigns(response.data.data);
         setLoading(false);

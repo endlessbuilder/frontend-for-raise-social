@@ -6,6 +6,8 @@ import DragDropUpload from "@/components/ui/dragDropUpload";
 import { Input } from "@nextui-org/input";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/autocomplete";
 import { Button } from "@nextui-org/button";
+import { SERVER_IP } from "../../../../../utils/constants";
+import { FSERVER_IP } from "../../../../../utils/constants";
 
 const Page = () => {
   const [categories, setCategories] = useState([]);
@@ -27,8 +29,8 @@ const Page = () => {
       try {
         setLoading(true);
         const [categoriesRes, locationsRes] = await Promise.all([
-          axios.get("http://192.168.146.191:5005/api/category"),
-          axios.get("http://192.168.146.191:5005/api/location"),
+          axios.get(`${SERVER_IP}/api/category`),
+          axios.get(`${SERVER_IP}/api/location`),
         ]);
 
         setCategories(categoriesRes.data.category || []);
@@ -70,7 +72,7 @@ const Page = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5004/api/file/upload",
+        `${FSERVER_IP}/api/file/upload`,
         formData,
         {
           headers: {
@@ -126,7 +128,7 @@ const Page = () => {
 
       // Send form data to the server
       const response = await axios.post(
-        "http://localhost:5005/api/campaign/create",
+        `${SERVER_IP}/api/campaign/create`,
         formData,
       );
       console.log("Campaign created successfully:", response.data);

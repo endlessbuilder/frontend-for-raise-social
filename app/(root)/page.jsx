@@ -8,14 +8,16 @@ import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { SERVER_IP } from "../../utils/constants";
 
 const page = () => {
   const [campaigns, setCampaigns] = useState([]);
   const fetchData = async () => {
     try {
-      const campaignsRes = await Promise(
-        axios.get("http://192.168.146.191:5005/api/campaign"),
-      );
+      const campaignsRes = await axios.get(`${SERVER_IP}/api/campaign`)
+      // const campaignsRes = await Promise(
+      //   axios.get(`${}/api/campaign`),
+      // );
       setCampaigns(campaignsRes.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -31,7 +33,7 @@ const page = () => {
         imgUrl="/images/home-hero-banner.jpeg"
         title={
           <h1 className="text-brand-ivory main-heading">
-            Together We <br /> Can Make a Change
+            localhost <br /> Can Make a Change
           </h1>
         }
         action={

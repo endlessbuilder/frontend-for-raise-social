@@ -9,6 +9,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useMemo } from "react";
 import axios from "axios";
+import { SERVER_IP } from "../../../utils/constants";
+
 const Campaigns = () => {
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -26,9 +28,9 @@ const Campaigns = () => {
     const fetchData = async () => {
       try {
         const [categoriesRes, locationsRes, campaignsRes] = await Promise.all([
-          axios.get("http://192.168.146.191:5005/api/category"),
-          axios.get("http://192.168.146.191:5005/api/location"),
-          axios.get("http://192.168.146.191:5005/api/campaign"),
+          axios.get(`${SERVER_IP}/api/category`),
+          axios.get(`${SERVER_IP}/api/location`),
+          axios.get(`${SERVER_IP}/api/campaign`),
         ]);
 
         setCategories(categoriesRes.data.category);
