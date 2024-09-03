@@ -4,31 +4,48 @@ import React, { useState, useEffect } from "react";
 import CampaignDetailsComponent from "./campaignDetailsComponent";
 import axios from "axios";
 import { SERVER_IP } from "../../../../utils/constants";
+import { Sidebar } from "../../../../components/layouts/sidebar";
 
 const Page = ({ params }) => {
-  const [campaigns, setCampaigns] = useState([]);
+  // State to store a single campaign (not an array)
+  const [campaignData, setCampaignData] = useState(null);
+  const [error, setError] = useState(null); // To handle errors
+  const [loading, setLoading] = useState(true); // Loading state
+
+  console.log(`API URL: ${SERVER_IP}/api/campaign/${params.slug}`);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const campaignsRes = await axios.get(
-          `${SERVER_IP}/api/campaign/${params}`,
+          `${SERVER_IP}/api/campaign/${params.slug}`
         );
-        setCampaigns(campaignsRes.data.data);
-        console.log("Fetched Campaigns:", campaigns);
+        setCampaignData(campaignsRes.data.data); // Assuming the response has "data"
+        console.log("Fetched Campaign:", campaignsRes.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError("Failed to fetch campaign data");
+      } finally {
+        setLoading(false); // Whether success or failure, loading stops
       }
     };
 
     fetchData();
-  }, []);
+  }, [params.slug]); // Add params.slug as a dependency
 
-  // const campaignData = campaigns.find((item) => item?._id === params.slug);
-  // console.log("Selected Campaign ID:", params.slug);
-  // console.log("Selected Campaign Data:", campaignData);
+  if (loading) {
+    return <div>Loading...</div>; // Show loading state
+  }
 
-  // return <CampaignDetailsComponent campaignData={campaignData} />;
+  if (error) {
+    return <div>{error}</div>; // Show error message
+  }
+
+  if (!campaignData) {
+    return <div>No campaign found</div>; // Handle case when no campaign data is found
+  }
+
+  return <CampaignDetailsComponent campaignData={campaignData[0]} />
 };
 
 export default Page;
