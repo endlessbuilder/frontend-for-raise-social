@@ -11,7 +11,8 @@ const CampaignCard = (props) => {
       <div className="flex overflow-hidden relative flex-col w-full">
         <img
           loading="lazy"
-          src={`${FSERVER_IP}/api/file/download/` + imgUrl}
+          // src={`${FSERVER_IP}/api/file/download/` + imgUrl}
+          src="/images/tiger.png"
           className="object-cover w-full aspect-[1.08]"
         />
       </div>

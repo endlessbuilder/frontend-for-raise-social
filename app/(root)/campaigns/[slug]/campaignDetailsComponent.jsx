@@ -13,7 +13,6 @@ import { Button } from "@nextui-org/button";
 import DonateNowComp from "./donateNowComp";
 import { Avatar } from "@nextui-org/avatar";
 import { useState } from "react";
-import TIGER_IMG from "../../../../public/images/tiger.png"
 
 
 
@@ -93,7 +92,7 @@ function CampaignDetailsComponent({ campaignData }) {
             </div>
             <img
               // src={campaignData.file}
-              src={TIGER_IMG}
+              src="/images/tiger.png"
               alt="Campaign Image"
               className="w-full mt-8 object-cover max-h-[450px]" />
           </div>
