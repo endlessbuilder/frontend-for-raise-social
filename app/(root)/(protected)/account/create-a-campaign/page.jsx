@@ -85,9 +85,11 @@ const Page = () => {
       const uploadedFiles = response.data.uploaded;
       console.log("Uploaded Files:", uploadedFiles);
 
-      // Map the file IDs
-      const fileIds = uploadedFiles.map((file) => file._id);
-      return fileIds;
+      if (uploadedFiles != undefined) {
+        // Map the file IDs
+        const fileIds = uploadedFiles.map((file) => file._id);
+        return fileIds;
+      }
     } catch (error) {
       console.error("Error uploading files:", error);
       throw error;
@@ -97,29 +99,39 @@ const Page = () => {
   const handleSubmit = async () => {
     try {
       // Upload campaign image
-      const campaignImageIds = await uploadFile(campaignImage);
-      setCampaignImageId(campaignImageIds[0]); // Assuming there's only one campaign image
-      console.log(campaignImageIds);
-      // Debugging: Check if proofDocuments contains files
-      console.log("Proof Documents:", proofDocuments);
+      if (campaignImage != undefined) {
+        const campaignImageIds = await uploadFile(campaignImage);
+        setCampaignImageId(campaignImageIds[0]); // Assuming there's only one campaign 
+        console.log(campaignImageIds);
+      }
 
-      // Upload proof documents and get their IDs
-      const proofDocumentIds = await uploadFile(proofDocuments);
-      setProofDocumentIds(proofDocumentIds);
+      if (proofDocuments != undefined) {
+        // Debugging: Check if proofDocuments contains files
+        console.log("Proof Documents:", proofDocuments);
 
-      console.log("Proof Document IDs:", proofDocumentIds);
+        // Upload proof documents and get their IDs
+        const proofDocumentIds = await uploadFile(proofDocuments);
+        setProofDocumentIds(proofDocumentIds);
+
+        console.log("Proof Document IDs:", proofDocumentIds);
+      }
       // if (!validateInputs()) {
       //   alert("All fields must be filled!");
       //   return;
       // }
       // Prepare form data
 
+      const fileCampaign = '';
+      // if(campaignImageIds != undefined){
+      //   fileCampaign = campaignImageIds[0];
+      // }
+
       const formData = {
         title: campaignTitle,
         categoryId: category,
         countryId: location,
         amount: amount,
-        file: campaignImageIds[0],
+        file: fileCampaign,
         kyc: proofDocumentIds,
         text: description,
         createrId: userID,

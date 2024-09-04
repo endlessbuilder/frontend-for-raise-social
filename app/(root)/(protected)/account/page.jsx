@@ -1,7 +1,7 @@
 import React from 'react'
 import DonationChart from './donationChart'
 import DonationListComponent from './donationList'
-import CampaignListComponent from './campaignList'
+import CampaignListComponent from '../../other/CampaignListComponent'
 
 const page = () => {
     return (

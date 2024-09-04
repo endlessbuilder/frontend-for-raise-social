@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const CampaignListComponent = () => {
     return (
@@ -7,9 +8,9 @@ const CampaignListComponent = () => {
                 <h1 className="text-3xl tracking-widest uppercase text-zinc-800">
                     Your Campaigns
                 </h1>
-                <button className="px-6 py-3.5 text-base text-amber-50 bg-stone-700 rounded-full">
+                <Link className="px-6 py-3.5 text-base text-amber-50 bg-stone-700 rounded-full" href="/account/create-a-campaign">
                     Create a Campaign
-                </button>
+                </Link>
             </header>
 
             <FilterSection />
