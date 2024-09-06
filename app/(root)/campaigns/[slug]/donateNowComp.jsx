@@ -4,9 +4,10 @@ import { Input, Textarea } from "@nextui-org/input";
 import React, { useState, useEffect } from "react";
 import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Button } from "@nextui-org/button";
+import { LOCALNET } from "../../../../utils/constants";
 
 // Initialize connection to Solana devnet (change to mainnet-beta for production)
-const connection = new Connection("https://api.devnet.solana.com");
+const connection = new Connection(LOCALNET);
 
 const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     const [wallet, setWallet] = useState(null);
@@ -49,6 +50,7 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
                     try {
                         const response = await provider.connect();
                         setWallet(response.publicKey.toString());
+                        console.log(">>> wallet in create campaign : ", wallet);
                         await updateBalance(response.publicKey);
                     } catch (error) {
                         console.error("Error connecting to Phantom wallet:", error);
@@ -175,7 +177,7 @@ const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onD
             </button>
         </div>
         {wallet && (
-            <p className="mb-4 text-brand-olive-green font-bold">Balance: {balance ? `${balance.toFixed(4)} SOL` : `${balance.toFixed(4)} SOL`}</p>
+            <p className="mb-4 text-brand-olive-green font-bold">Balance: {balance ? `${balance.toFixed(4)} SOL` : `0 SOL`}</p>
         )}
         <div className="mb-4">
             <Input
