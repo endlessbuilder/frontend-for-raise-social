@@ -106,7 +106,7 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
                     <div className="flex items-center gap-4 mb-8 flex-col mt-6">
                         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="80" height="80" rx="40" fill="#3D4630" />
-                            <path d="M24.25 42.25L34.75 52.75L55.75 30.25" stroke="#FAFF7D" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M24.25 42.25L34.75 52.75L55.75 30.25" stroke="#FAFF7D" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         <p className="text-base font-bold tracking-wider text-brand-olive-green">Donation Received </p>
                     </div>
@@ -171,7 +171,7 @@ const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onD
             >
                 {wallet ? `Connected: ${wallet.slice(0, 4)}...${wallet.slice(-4)}` : "Connect Wallet"}
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 7.42927H17.7143C18.3205 7.42927 18.9019 7.67008 19.3305 8.09874C19.7592 8.52739 20 9.10877 20 9.71498V16.5721C20 17.1783 19.7592 17.7597 19.3305 18.1884C18.9019 18.617 18.3205 18.8578 17.7143 18.8578H6.28571C5.67951 18.8578 5.09812 18.617 4.66947 18.1884C4.24082 17.7597 4 17.1783 4 16.5721V7.42927ZM4 7.42927H16.5714V6.28641C16.5714 5.98331 16.451 5.69262 16.2367 5.47829C16.0224 5.26396 15.7317 5.14355 15.4286 5.14355H5.14286C4.83975 5.14355 4.54906 5.26396 4.33474 5.47829C4.12041 5.69262 4 5.98331 4 6.28641V7.42927Z" stroke="#3D4630" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4 7.42927H17.7143C18.3205 7.42927 18.9019 7.67008 19.3305 8.09874C19.7592 8.52739 20 9.10877 20 9.71498V16.5721C20 17.1783 19.7592 17.7597 19.3305 18.1884C18.9019 18.617 18.3205 18.8578 17.7143 18.8578H6.28571C5.67951 18.8578 5.09812 18.617 4.66947 18.1884C4.24082 17.7597 4 17.1783 4 16.5721V7.42927ZM4 7.42927H16.5714V6.28641C16.5714 5.98331 16.451 5.69262 16.2367 5.47829C16.0224 5.26396 15.7317 5.14355 15.4286 5.14355H5.14286C4.83975 5.14355 4.54906 5.26396 4.33474 5.47829C4.12041 5.69262 4 5.98331 4 6.28641V7.42927Z" stroke="#3D4630" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M16.5706 14.2867C17.2018 14.2867 17.7134 13.775 17.7134 13.1438C17.7134 12.5127 17.2018 12.001 16.5706 12.001C15.9394 12.001 15.4277 12.5127 15.4277 13.1438C15.4277 13.775 15.9394 14.2867 16.5706 14.2867Z" fill="#3D4630" />
                 </svg>
             </button>

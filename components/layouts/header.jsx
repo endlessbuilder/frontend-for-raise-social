@@ -20,9 +20,9 @@ import { useState } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const token = localStorage.getItem("authToken");
   const pathname = usePathname();
-
+  const token = localStorage.getItem("authToken");
+  
   const menuItems = [
     "Profile",
     "Dashboard",
@@ -63,6 +63,7 @@ const Header = () => {
   });
 
   useEffect(() => {
+
     if (isGreenDefault) {
       setIsNavTransparent(false);
     }
