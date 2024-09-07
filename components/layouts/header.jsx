@@ -109,7 +109,7 @@ const Header = () => {
               color="foreground"
               href="/login"
               className="font-body font-bold text-lg text-white">
-              login
+              Login
             </Link>
           ) : (
             <Link

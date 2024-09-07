@@ -12,7 +12,7 @@ const CampaignCard = (props) => {
         <img
           loading="lazy"
           // src={`${FSERVER_IP}/api/file/download/` + imgUrl}
-          src="/images/tiger.png"
+          src={imgUrl}
           className="object-cover w-full aspect-[1.08]"
         />
       </div>

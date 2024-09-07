@@ -14,6 +14,7 @@ const Page = () => {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [camImgFile, setCamImgFile] = useState(null);
   const [category, setCategory] = useState();
   const [location, setLocation] = useState();
   const [amount, setAmount] = useState();
@@ -45,6 +46,14 @@ const Page = () => {
     fetchData();
   }, []);
 
+  // Helper function to extract plain text from HTML
+  const getInnerText = (html) => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    return tempDiv.textContent || tempDiv.innerText || '';
+  };
+
+
   // const validateInputs = () => {
   //   if (
   //     !campaignTitle ||
@@ -59,6 +68,10 @@ const Page = () => {
   //   }
   //   return true;
   // };
+
+  const onHandleContent = e => {
+    console.log(e.target.value);
+  }
 
   const uploadFile = async (files) => {
     const formData = new FormData();
@@ -96,18 +109,42 @@ const Page = () => {
     }
   };
 
+  const campaignImgReader = new FileReader();
+  campaignImgReader.onloadend = function() {
+    // const base64String = campaignImgReader.result.split(', ')[1]; // Remove data:image/...;base64, part
+    // console.log(campaignImgReader.result);
+    setCamImgFile(campaignImgReader.result);
+  };
+  // const proofDocumentReader = new FileReader();
+  // proofDocumentReader.onloadend = function() {
+  //   // const base64String = proofDocumentReader.result.split(', ')[1]; // Remove data:image/...;base64, part
+  //   console.log(proofDocumentReader.result);
+  // };
+
+  const handleCamImg = img => {
+    setCampaignImage(img);
+    console.log(img);
+    if(img!=undefined){
+      campaignImgReader.readAsDataURL(img);
+    }
+  }
+
   const handleSubmit = async () => {
     try {
       // Upload campaign image
-      if (campaignImage != undefined) {
-        const campaignImageIds = await uploadFile(campaignImage);
-        setCampaignImageId(campaignImageIds[0]); // Assuming there's only one campaign 
-        console.log(campaignImageIds);
+      // if (campaignImage != undefined) {
+      //   const campaignImageIds = await uploadFile(campaignImage);
+      //   setCampaignImageId(campaignImageIds[0]); // Assuming there's only one campaign 
+      //   console.log(campaignImageIds);
+      // }
+
+      if(campaignImage == undefined){
+        setCamImgFile(null);
       }
 
       if (proofDocuments != undefined) {
         // Debugging: Check if proofDocuments contains files
-        console.log("Proof Documents:", proofDocuments);
+        // console.log("Proof Documents:", proofDocuments);
 
         // Upload proof documents and get their IDs
         const proofDocumentIds = await uploadFile(proofDocuments);
@@ -120,23 +157,27 @@ const Page = () => {
       //   return;
       // }
       // Prepare form data
-
-      const fileCampaign = '';
       // if(campaignImageIds != undefined){
       //   fileCampaign = campaignImageIds[0];
       // }
+      // proofDocumentReader.readAsDataURL(proofDocuments)
+
+      console.log("ddesr",description)
 
       const formData = {
         title: campaignTitle,
         categoryId: category,
         countryId: location,
         amount: amount,
-        file: fileCampaign,
+        // file: fileCampaign,
+        file: camImgFile,
         kyc: proofDocumentIds,
-        text: description,
+        text: getInnerText(description),
         createrId: userID,
         totalAmount: "0",
       };
+
+      console.log(formData)
 
       // Send form data to the server
       const response = await axios.post(
@@ -211,12 +252,12 @@ const Page = () => {
             }}
             isMultiple={false}
             label="Campaign Image"
-            onChange={(files) => setCampaignImage(files[0])}
+            onChange={(files) => handleCamImg(files[0])}
           />
         </div>
         <RichTextEditor
-          value={description}
-          onChange={(content) => setDescription(content)}
+          value="{description}"
+          onClick={onHandleContent}
           placeholder="Hello Everyone, We are raising funds for..........."
         />
         <div className="col-span-2">
