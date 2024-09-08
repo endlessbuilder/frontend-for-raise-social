@@ -4,36 +4,54 @@ import { Input, Textarea } from "@nextui-org/input";
 import React, { useState, useEffect } from "react";
 import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Button } from "@nextui-org/button";
-import { LOCALNET } from "../../../../utils/constants";
-
-// Initialize connection to Solana devnet (change to mainnet-beta for production)
-const connection = new Connection(LOCALNET);
+import { LOCALNET, TESTNET } from "../../../../utils/constants";
 
 const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     const [wallet, setWallet] = useState(null);
     const [balance, setBalance] = useState(null);
     const [amount, setAmount] = useState('');
 
-    useEffect(() => {
-        const connectWallet = async () => {
-            if ("solana" in window) {
-                const provider = window.solana;
-                if (provider.isPhantom) {
-                    try {
-                        const response = await provider.connect({ onlyIfTrusted: true });
-                        setWallet(response.publicKey.toString());
-                        await updateBalance(response.publicKey);
-                    } catch (error) {
-                        console.error("Error connecting to Phantom wallet:", error);
-                    }
-                }
-            }
-        };
+    const [connection, setConnection] = useState(null); // Connection now part of state
 
-        connectWallet();
+    useEffect(() => {
+        // const connectWallet = async () => {
+        //     if ("solana" in window) {
+        //         const provider = window.solana;
+        //         if (provider.isPhantom) {
+        //             try {
+        //                 const response = await provider.connect({ onlyIfTrusted: true });
+        //                 setWallet(response.publicKey.toString());
+        //                 await updateBalance(response.publicKey);
+        //             } catch (error) {
+        //                 console.error("Error connecting to Phantom wallet:", error);
+        //             }
+        //         }
+        //     }
+        // };
+
+        // connectWallet();
+
+        // Initialize the connection in the global state
+        const newConnection = new Connection(TESTNET, 'confirmed');
+        setConnection(newConnection); // Set connection to state
+        console.log('>>> in useEffect Connected to', newConnection.rpcEndpoint);
+
+        // Optionally auto-connect Phantom if available
+        if ("solana" in window) {
+            const provider = window.solana;
+            if (provider.isPhantom) {
+                provider.connect({ onlyIfTrusted: true }).then((response) => {
+                    setWallet(response.publicKey.toString());
+                    updateBalance(response.publicKey, newConnection);
+                }).catch((error) => {
+                    console.error("Auto-connect to Phantom failed:", error);
+                });
+            }
+        }
     }, []);
 
     const updateBalance = async (publicKey) => {
+        console.log('>>> in updateBalance Connected to', connection.rpcEndpoint);
         try {
             const balance = await connection.getBalance(new PublicKey(publicKey));
             setBalance(balance / LAMPORTS_PER_SOL);
@@ -43,18 +61,16 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     };
 
     const handleConnectWallet = async () => {
-        if (!wallet) {
-            if ("solana" in window) {
-                const provider = window.solana;
-                if (provider.isPhantom) {
-                    try {
-                        const response = await provider.connect();
-                        setWallet(response.publicKey.toString());
-                        console.log(">>> wallet in create campaign : ", wallet);
-                        await updateBalance(response.publicKey);
-                    } catch (error) {
-                        console.error("Error connecting to Phantom wallet:", error);
-                    }
+        // console.log('>>> Connected to', connection.clusterApiUrl);
+        if (!wallet && "solana" in window) {
+            const provider = window.solana;
+            if (provider.isPhantom) {
+                try {
+                    const response = await provider.connect();
+                    setWallet(response.publicKey.toString());
+                    await updateBalance(response.publicKey, connection); // Use state connection
+                } catch (error) {
+                    console.error("Error connecting to Phantom wallet:", error);
                 }
             } else {
                 window.open("https://phantom.app/", "_blank");
@@ -63,11 +79,12 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     };
 
     const handleDonate = async (e) => {
+        console.log(">>> --- handleDonate ---")
         e.preventDefault();
         if (!wallet || !amount) return;
 
         const donationAmount = parseFloat(amount) * LAMPORTS_PER_SOL;
-        const recipient = new PublicKey("RECIPIENT_PUBLIC_KEY_HERE"); // Replace with actual recipient address
+        const recipient = new PublicKey("3JKwidu2bmNhBcJs62TxHHaaFn98rdtNGcprRSd7pEMT"); // Replace with actual recipient address
 
         try {
             const transaction = new Transaction().add(
@@ -82,6 +99,8 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
             transaction.recentBlockhash = blockhash;
             transaction.feePayer = new PublicKey(wallet);
 
+            console.log(">>> transaction : ", transaction)
+
             const signed = await window.solana.signTransaction(transaction);
             const signature = await connection.sendRawTransaction(signed.serialize());
             await connection.confirmTransaction(signature);
@@ -93,6 +112,8 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
             console.error("Error making donation:", error);
             alert("Donation failed. Please try again.");
         }
+
+        setSubmitted()
     };
     return (
         <div>
@@ -145,7 +166,6 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
                         setAmount={setAmount}
                         onConnectWallet={handleConnectWallet}
                         onDonate={handleDonate}
-                        setSubmitted={setSubmitted}
                     />
                     <footer className="mt-6">
                         <p className="text-base font-bold tracking-wider text-olive-green">
@@ -161,8 +181,8 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
 
 // ... (CampaignImage and CampaignDetails components remain unchanged)
 
-const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onDonate, setSubmitted }) => (
-    <form onSubmit={onDonate}>
+const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onDonate }) => (
+    <form>
         <div className="mb-4">
             <button
                 type="button"
@@ -200,7 +220,7 @@ const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onD
             // type="submit"
             className="w-full py-3.5 mt-4 text-sm font-bold border border-olive-green rounded-full text-olive-green"
             // disabled={!wallet || !amount}
-            onClick={setSubmitted}
+            onClick={onDonate}
         >
             Donate Now
         </button>
