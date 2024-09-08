@@ -8,12 +8,18 @@ import { Autocomplete, AutocompleteItem } from "@nextui-org/autocomplete";
 import { Button } from "@nextui-org/button";
 import { SERVER_IP } from "../../../../../utils/constants";
 import { FSERVER_IP } from "../../../../../utils/constants";
-import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL, Keypair } from '@solana/web3.js';
+const { Program, AnchorProvider, Wallet } = require('@coral-xyz/anchor');
 
-import { LOCALNET } from "../../../../../utils/constants";
+const RaiseContractImpl = require('../../../../../utils/integration');
+import { TESTNET } from "../../../../../utils/constants";
+const bs58 = require('@coral-xyz/anchor/dist/cjs/utils/bytes/bs58');
+const { BN } = require('@coral-xyz/anchor')
 
-// Initialize connection to Solana devnet (change to mainnet-beta for production)
-const connection = new Connection(LOCALNET);
+const idl = require("../../../../../utils/idl/raise_contract.json");
+
+console.log(">>> connected to ", TESTNET);
+const connection = new Connection(TESTNET);
 
 const Page = () => {
   const [categories, setCategories] = useState([]);
@@ -64,6 +70,7 @@ const Page = () => {
       if ("solana" in window) {
         const provider = window.solana;
         if (provider.isPhantom) {
+          await provider.disconnect();
           try {
             const response = await provider.connect();
             setWallet(response.publicKey.toString());
@@ -189,6 +196,78 @@ const Page = () => {
         formData,
       );
       console.log("Campaign created successfully:", response.data);
+
+      // if (!wallet || !amount) await handleConnectWallet();
+      // console.log(">>> wallet publickey : ", wallet);
+      // try {
+      //   let creator = new PublicKey(wallet);
+      //   let goal = new BN(100 * LAMPORTS_PER_SOL);
+      //   let campaginDuration = new BN(30 * 24 * 60 * 60); // 30 days
+      //   let minDepositAmount = new BN(1 * LAMPORTS_PER_SOL);
+      //   let campaign = PublicKey.findProgramAddressSync([Buffer.from('campaign'), creator.toBuffer()], idl.metadata.address);
+      //   let campaignAuthority = PublicKey.findProgramAddressSync([Buffer.from('campaign_authority')], idl.metadata.address);
+
+      //   const provider = new AnchorProvider(
+      //     connection,
+      //     new Wallet(Keypair.generate()),
+      //     { commitment: 'processed' }
+      //   );
+      //   const program = new Program(
+      //     idl,
+      //     idl.metadata.address,
+      //     provider
+      //   );
+
+      //   const raiseContract = RaiseContractImpl.create(TESTNET);
+      //   let { txId } = await raiseContract.initializeCampaign(
+      //     goal,
+      //     campaginDuration,
+      //     minDepositAmount,
+      //     creator
+      //   );
+
+      //   console.log(">>> transaction : ", txId)
+
+      //   alert("Create campaign successful!");
+      // } catch (error) {
+      //   console.error("Error creating campaign:", error);
+      //   alert("Creating campaign failed. Please try again.");
+      // }
+
+    //   console.log(">>> connected to ", connection);
+    //   console.log(">>> wallet to ", wallet);
+    //   await handleConnectWallet();
+    //   if (!wallet) return;
+    //   await updateBalance(wallet, connection); // Use state connection
+
+    //   const fee = parseFloat(0.0001) * LAMPORTS_PER_SOL;
+    //   const recipient = new PublicKey("3JKwidu2bmNhBcJs62TxHHaaFn98rdtNGcprRSd7pEMT"); // Replace with actual recipient address
+
+    //   try {
+    //     const transaction = new Transaction().add(
+    //       SystemProgram.transfer({
+    //         fromPubkey: new PublicKey(wallet),
+    //         toPubkey: recipient,
+    //         lamports: fee,
+    //       })
+    //     );
+
+    //     const { blockhash } = await connection.getLatestBlockhash();
+    //     transaction.recentBlockhash = blockhash;
+    //     transaction.feePayer = new PublicKey(wallet);
+
+    //     console.log(">>> transaction : ", transaction)
+
+    //     const signed = await window.solana.signTransaction(transaction);
+    //     const signature = await connection.sendRawTransaction(signed.serialize());
+    //     await connection.confirmTransaction(signature);
+
+    //     alert("Creating campagin successful!");
+    //   } catch (error) {
+    //     console.error("Error creating campaign:", error);
+    //     alert("creating camgaign failed. Please try again.");
+    //   }
+
     } catch (error) {
       console.error("Submission failed:", error);
     }
