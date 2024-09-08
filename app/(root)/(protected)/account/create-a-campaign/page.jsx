@@ -29,12 +29,15 @@ const Page = () => {
   const [description, setDescription] = useState("");
   const [campaignImageIds, setCampaignImageId] = useState();
   const [proofDocumentIds, setProofDocumentIds] = useState([]);
-  const userID = localStorage.getItem("userID");
 
   const [wallet, setWallet] = useState(null);
   const [balance, setBalance] = useState(null);
 
+  const userID = localStorage.getItem("userID");
+
   useEffect(() => {
+    const userID = localStorage.getItem("userID");
+
     const fetchData = async () => {
       try {
         setLoading(true);
