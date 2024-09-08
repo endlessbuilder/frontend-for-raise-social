@@ -8,6 +8,12 @@ import { Autocomplete, AutocompleteItem } from "@nextui-org/autocomplete";
 import { Button } from "@nextui-org/button";
 import { SERVER_IP } from "../../../../../utils/constants";
 import { FSERVER_IP } from "../../../../../utils/constants";
+import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
+
+import { LOCALNET } from "../../../../../utils/constants";
+
+// Initialize connection to Solana devnet (change to mainnet-beta for production)
+const connection = new Connection(LOCALNET);
 
 const Page = () => {
   const [categories, setCategories] = useState([]);
@@ -24,8 +30,15 @@ const Page = () => {
   const [description, setDescription] = useState("");
   const [campaignImageIds, setCampaignImageId] = useState();
   const [proofDocumentIds, setProofDocumentIds] = useState([]);
+
+  const [wallet, setWallet] = useState(null);
+  const [balance, setBalance] = useState(null);
+
   const userID = localStorage.getItem("userID");
+
   useEffect(() => {
+    const userID = localStorage.getItem("userID");
+
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -44,13 +57,44 @@ const Page = () => {
       }
     };
     fetchData();
+
   }, []);
+
 
   // Helper function to extract plain text from HTML
   const getInnerText = (html) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
     return tempDiv.textContent || tempDiv.innerText || '';
+  };
+
+  const handleConnectWallet = async () => {
+    if (!wallet) {
+      if ("solana" in window) {
+        const provider = window.solana;
+        if (provider.isPhantom) {
+          try {
+            const response = await provider.connect();
+            setWallet(response.publicKey.toString());
+            console.log(">>> wallet in create campaign : ", wallet);
+            await updateBalance(response.publicKey);
+          } catch (error) {
+            console.error("Error connecting to Phantom wallet:", error);
+          }
+        }
+      } else {
+        window.open("https://phantom.app/", "_blank");
+      }
+    }
+  };
+
+  const updateBalance = async (publicKey) => {
+    try {
+      const balance = await connection.getBalance(new PublicKey(publicKey));
+      setBalance(balance / LAMPORTS_PER_SOL);
+    } catch (error) {
+      console.error("Error fetching balance:", error);
+    }
   };
 
 
@@ -130,6 +174,8 @@ const Page = () => {
   }
 
   const handleSubmit = async () => {
+    console.log(">>> clicked Send For KYC ");
+    await handleConnectWallet();
     try {
       // Upload campaign image
       // if (campaignImage != undefined) {
