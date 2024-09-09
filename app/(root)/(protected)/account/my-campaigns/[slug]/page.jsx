@@ -47,7 +47,7 @@ const page = () => {
                 <div className='col-span-7'>
                     <img
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/404118f2e1fc523f2713f14a85287a293ce21ffa4cfa985fc7d8ffb9ac4f0306"
-                        alt="Campaign Image"
+                        alt="Campaign"
                         className="w-full object-cover"
                     />
                 </div>
