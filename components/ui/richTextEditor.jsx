@@ -134,7 +134,7 @@ const RichTextEditor = ({ placeholder }) => {
                     <ListOrdered className="w-4 h-4" />
                 </button>
                 <button onClick={onImageClick} className="p-1 rounded hover:bg-gray-100">
-                    <Image className="w-4 h-4" />
+                    <Image className="w-4 h-4" alt="list" />
                 </button>
             </div>
             <div className="p-4">
