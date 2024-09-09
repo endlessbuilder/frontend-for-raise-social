@@ -34,24 +34,25 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
         // Initialize the connection in the global state
         const newConnection = new Connection(TESTNET, 'confirmed');
         setConnection(newConnection); // Set connection to state
-        console.log('>>> in useEffect Connected to', newConnection.rpcEndpoint);
+        console.log('>>> in useEffect Connected to', newConnection);
 
         // Optionally auto-connect Phantom if available
-        if ("solana" in window) {
+        // if ("solana" in window) {
             const provider = window.solana;
-            if (provider.isPhantom) {
+            // if (provider.isPhantom) {
                 provider.connect({ onlyIfTrusted: true }).then((response) => {
                     setWallet(response.publicKey.toString());
+                    console.log(">>> wallet in DonateNowComp : ", wallet);
                     updateBalance(response.publicKey, newConnection);
                 }).catch((error) => {
                     console.error("Auto-connect to Phantom failed:", error);
                 });
-            }
-        }
+            // }
+        // }
     }, []);
 
     const updateBalance = async (publicKey) => {
-        console.log('>>> in updateBalance Connected to', connection.rpcEndpoint);
+        console.log('>>> in updateBalance Connected to', connection);
         try {
             const balance = await connection.getBalance(new PublicKey(publicKey));
             setBalance(balance / LAMPORTS_PER_SOL);
@@ -81,6 +82,7 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     const handleDonate = async (e) => {
         console.log(">>> --- handleDonate ---")
         e.preventDefault();
+        await updateBalance(wallet, connection); // Use state connection
         if (!wallet || !amount) return;
 
         const donationAmount = parseFloat(amount) * LAMPORTS_PER_SOL;
