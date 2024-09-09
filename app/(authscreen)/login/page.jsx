@@ -14,7 +14,7 @@ const Page = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError(null); // Clear previous errors
-
+  
     try {
       const response = await fetch(`${SERVER_IP}/api/login`, {
         method: "POST",
@@ -26,32 +26,38 @@ const Page = () => {
           password,
         }),
       });
-
-      debugger
-
+  
+      // Check if response is JSON
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
         const data = await response.json();
+  
+        // If response is not OK, throw error
         if (!response.ok) {
           throw new Error(data.message || "Something went wrong");
         }
+  
         // Handle successful login
         console.log("Login successful", data);
+  
         // Save user info and token in localStorage
         localStorage.setItem("userID", data.id);
         localStorage.setItem("userName", data.fullName);
         localStorage.setItem("userEmail", data.email);
         localStorage.setItem("authToken", data.token);
+  
+        // Redirect to campaigns page after successful login
         window.location.href = "/campaigns";
       } else {
         // Handle unexpected content-type
         throw new Error("Unexpected response format");
       }
     } catch (err) {
-      console.error(err);
-      setError(err.message);
+      console.error("Login error:", err);
+      setError(err.message || "Login failed");
     }
   };
+  
 
   return (
     <div className="overflow-hidden p-8 lg:py-14 lg:pr-7 lg:pl-20 bg-brand-ivory max-md:px-5 lg:h-screen">

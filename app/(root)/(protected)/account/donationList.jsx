@@ -83,7 +83,7 @@ const FilterSection = ({ compFor }) => (
                         ]
                     }
                     icon={<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 0H3.7425V19.8913H1.25V0ZM5.07 0.65V10.1188C5.07 10.1188 7.08375 8.33 11.555 10C16.025 11.6725 16.9362 11.2175 18.695 10.9275C18.695 10.9275 16.135 9.83875 14.6675 5.89125C14.6675 5.89125 18.4012 2.4475 18.695 0.54875C18.695 0.54875 14.07 2.06375 11.5063 0.85C8.94 -0.36625 6.2425 -0.11125 5.07 0.65Z" fill="#3D4630" />
+                        <path fillRule="evenodd" clipRule="evenodd" d="M1.25 0H3.7425V19.8913H1.25V0ZM5.07 0.65V10.1188C5.07 10.1188 7.08375 8.33 11.555 10C16.025 11.6725 16.9362 11.2175 18.695 10.9275C18.695 10.9275 16.135 9.83875 14.6675 5.89125C14.6675 5.89125 18.4012 2.4475 18.695 0.54875C18.695 0.54875 14.07 2.06375 11.5063 0.85C8.94 -0.36625 6.2425 -0.11125 5.07 0.65Z" fill="#3D4630" />
                     </svg>
                     }
                 />
@@ -107,7 +107,7 @@ const FilterSection = ({ compFor }) => (
                         ]
                     }
                     icon={<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 0H3.7425V19.8913H1.25V0ZM5.07 0.65V10.1188C5.07 10.1188 7.08375 8.33 11.555 10C16.025 11.6725 16.9362 11.2175 18.695 10.9275C18.695 10.9275 16.135 9.83875 14.6675 5.89125C14.6675 5.89125 18.4012 2.4475 18.695 0.54875C18.695 0.54875 14.07 2.06375 11.5063 0.85C8.94 -0.36625 6.2425 -0.11125 5.07 0.65Z" fill="#3D4630" />
+                        <path fillRule="evenodd" clipRule="evenodd" d="M1.25 0H3.7425V19.8913H1.25V0ZM5.07 0.65V10.1188C5.07 10.1188 7.08375 8.33 11.555 10C16.025 11.6725 16.9362 11.2175 18.695 10.9275C18.695 10.9275 16.135 9.83875 14.6675 5.89125C14.6675 5.89125 18.4012 2.4475 18.695 0.54875C18.695 0.54875 14.07 2.06375 11.5063 0.85C8.94 -0.36625 6.2425 -0.11125 5.07 0.65Z" fill="#3D4630" />
                     </svg>
                     }
                 />
@@ -116,8 +116,8 @@ const FilterSection = ({ compFor }) => (
         </div>
         <Input startContent={
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 18C14.866 18 18 14.866 18 11C18 7.13401 14.866 4 11 4C7.13401 4 4 7.13401 4 11C4 14.866 7.13401 18 11 18Z" stroke="#3D4630" stroke-width="2" />
-                <path d="M20 20L17 17" stroke="#3D4630" stroke-width="2" stroke-linecap="round" />
+                <path d="M11 18C14.866 18 18 14.866 18 11C18 7.13401 14.866 4 11 4C7.13401 4 4 7.13401 4 11C4 14.866 7.13401 18 11 18Z" stroke="#3D4630" strokeWidth="2" />
+                <path d="M20 20L17 17" stroke="#3D4630" strokeWidth="2" strokeLinecap="round" />
             </svg>
         } size='lg' variant="bordered" placeholder='Search' radius='full' classNames={{
             inputWrapper: "border-brand-olive-green"

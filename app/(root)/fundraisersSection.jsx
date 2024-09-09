@@ -68,7 +68,7 @@ const FundraisersSection = () => {
           </Button>
         </Link>
       </div>
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-4 grid-rows-1 grid-flow-row gap-6 overflow-x-auto flex-nowrap">
         {campaigns.length > 0 ? (
           campaigns.map((campaign, i) => (
             <Link href={`/campaigns/${campaign._id}`} key={campaign._id}>

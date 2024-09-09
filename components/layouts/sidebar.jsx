@@ -2,24 +2,33 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { SERVER_IP } from "../../utils/constants";
 
 const Sidebar = ({ navItems }) => {
   const pathname = usePathname();
+  
 
   const handleLogout = async () => {
-    // try{
-    //   // await fetch(`${SERVER_IP}/api/logout`, {
-    //   //   method: "POST",
-    //   //   headers: {
-    //   //     "Content-Type": "application/json",
-    //   //   }
-    //   // });
-      // localStorage.clear();
-      window.location.href = "/";
-    // } catch (error) {
-    //   console.error(err);
-    //   setError(msg);
-    // }
+    try {
+      const response = await fetch(`${SERVER_IP}/api/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: localStorage.getItem("userEmail")
+        })
+      });
+
+      if (response.ok) {
+        window.location.href = "/login";
+        localStorage.clear();
+      } else {
+        console.error("Failed to logout");
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   }
 
   return (

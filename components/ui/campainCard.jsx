@@ -3,7 +3,7 @@ import { FSERVER_IP } from "../../utils/constants";
 
 const CampaignCard = (props) => {
   const { imgUrl, title, amount, type } = props;
-  console.log(imgUrl);
+  // console.log(imgUrl);
 
   return (
     <div
@@ -12,8 +12,10 @@ const CampaignCard = (props) => {
         <img
           loading="lazy"
           // src={`${FSERVER_IP}/api/file/download/` + imgUrl}
-          src="/images/tiger.png"
+          src={imgUrl}
           className="object-cover w-full aspect-[1.08]"
+          alt={title}
+          style={{width: "100%", height: "auto"}}
         />
       </div>
       <div className="flex flex-col p-5 mt-3.5 w-full">

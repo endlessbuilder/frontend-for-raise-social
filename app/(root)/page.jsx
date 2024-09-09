@@ -24,9 +24,38 @@ const page = () => {
     }
   };
   console.log(campaigns);
+
+  const createPlatform = async () => {
+    try {
+      const response = await axios.post(
+        `${SERVER_IP}/api/platform/create`
+      );
+
+      console.log("Platform created successfully", response);
+    } catch {
+      console.error("Error creating platform:", error);
+    }
+
+  };
+  const setPlatformFee = async () => {
+    try {
+      const response = await axios.post(
+        `${SERVER_IP}/api/platform/setFee`,
+        { feeToBeChanged: 0.02 }
+      );
+
+      console.log("Platform fee set successfully", response);
+    } catch {
+      console.error("Error platform fee set: ", error);
+    }
+
+  };
+
   useEffect(() => {
     fetchData();
+    // setPlatformFee()
   }, []);
+
   return (
     <>
       <HeroSection

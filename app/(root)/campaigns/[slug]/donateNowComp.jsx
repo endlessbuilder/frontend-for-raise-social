@@ -4,35 +4,55 @@ import { Input, Textarea } from "@nextui-org/input";
 import React, { useState, useEffect } from "react";
 import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Button } from "@nextui-org/button";
-
-// Initialize connection to Solana devnet (change to mainnet-beta for production)
-const connection = new Connection("https://api.devnet.solana.com");
+import { LOCALNET, TESTNET } from "../../../../utils/constants";
 
 const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     const [wallet, setWallet] = useState(null);
     const [balance, setBalance] = useState(null);
     const [amount, setAmount] = useState('');
 
-    useEffect(() => {
-        const connectWallet = async () => {
-            if ("solana" in window) {
-                const provider = window.solana;
-                if (provider.isPhantom) {
-                    try {
-                        const response = await provider.connect({ onlyIfTrusted: true });
-                        setWallet(response.publicKey.toString());
-                        await updateBalance(response.publicKey);
-                    } catch (error) {
-                        console.error("Error connecting to Phantom wallet:", error);
-                    }
-                }
-            }
-        };
+    const [connection, setConnection] = useState(null); // Connection now part of state
 
-        connectWallet();
+    useEffect(() => {
+        // const connectWallet = async () => {
+        //     if ("solana" in window) {
+        //         const provider = window.solana;
+        //         if (provider.isPhantom) {
+        //             try {
+        //                 const response = await provider.connect({ onlyIfTrusted: true });
+        //                 setWallet(response.publicKey.toString());
+        //                 await updateBalance(response.publicKey);
+        //             } catch (error) {
+        //                 console.error("Error connecting to Phantom wallet:", error);
+        //             }
+        //         }
+        //     }
+        // };
+
+        // connectWallet();
+
+        // Initialize the connection in the global state
+        const newConnection = new Connection(TESTNET, 'confirmed');
+        setConnection(newConnection); // Set connection to state
+        console.log('>>> in useEffect Connected to', newConnection);
+
+        // Optionally auto-connect Phantom if available
+        // if ("solana" in window) {
+            const provider = window.solana;
+            // if (provider.isPhantom) {
+                provider.connect({ onlyIfTrusted: true }).then((response) => {
+                    setWallet(response.publicKey.toString());
+                    console.log(">>> wallet in DonateNowComp : ", wallet);
+                    updateBalance(response.publicKey, newConnection);
+                }).catch((error) => {
+                    console.error("Auto-connect to Phantom failed:", error);
+                });
+            // }
+        // }
     }, []);
 
     const updateBalance = async (publicKey) => {
+        console.log('>>> in updateBalance Connected to', connection);
         try {
             const balance = await connection.getBalance(new PublicKey(publicKey));
             setBalance(balance / LAMPORTS_PER_SOL);
@@ -42,17 +62,16 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     };
 
     const handleConnectWallet = async () => {
-        if (!wallet) {
-            if ("solana" in window) {
-                const provider = window.solana;
-                if (provider.isPhantom) {
-                    try {
-                        const response = await provider.connect();
-                        setWallet(response.publicKey.toString());
-                        await updateBalance(response.publicKey);
-                    } catch (error) {
-                        console.error("Error connecting to Phantom wallet:", error);
-                    }
+        // console.log('>>> Connected to', connection.clusterApiUrl);
+        if (!wallet && "solana" in window) {
+            const provider = window.solana;
+            if (provider.isPhantom) {
+                try {
+                    const response = await provider.connect();
+                    setWallet(response.publicKey.toString());
+                    await updateBalance(response.publicKey, connection); // Use state connection
+                } catch (error) {
+                    console.error("Error connecting to Phantom wallet:", error);
                 }
             } else {
                 window.open("https://phantom.app/", "_blank");
@@ -61,11 +80,13 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     };
 
     const handleDonate = async (e) => {
+        console.log(">>> --- handleDonate ---")
         e.preventDefault();
+        await updateBalance(wallet, connection); // Use state connection
         if (!wallet || !amount) return;
 
         const donationAmount = parseFloat(amount) * LAMPORTS_PER_SOL;
-        const recipient = new PublicKey("RECIPIENT_PUBLIC_KEY_HERE"); // Replace with actual recipient address
+        const recipient = new PublicKey("3JKwidu2bmNhBcJs62TxHHaaFn98rdtNGcprRSd7pEMT"); // Replace with actual recipient address
 
         try {
             const transaction = new Transaction().add(
@@ -80,6 +101,8 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
             transaction.recentBlockhash = blockhash;
             transaction.feePayer = new PublicKey(wallet);
 
+            console.log(">>> transaction : ", transaction)
+
             const signed = await window.solana.signTransaction(transaction);
             const signature = await connection.sendRawTransaction(signed.serialize());
             await connection.confirmTransaction(signature);
@@ -91,6 +114,8 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
             console.error("Error making donation:", error);
             alert("Donation failed. Please try again.");
         }
+
+        setSubmitted()
     };
     return (
         <div>
@@ -104,7 +129,7 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
                     <div className="flex items-center gap-4 mb-8 flex-col mt-6">
                         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="80" height="80" rx="40" fill="#3D4630" />
-                            <path d="M24.25 42.25L34.75 52.75L55.75 30.25" stroke="#FAFF7D" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M24.25 42.25L34.75 52.75L55.75 30.25" stroke="#FAFF7D" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         <p className="text-base font-bold tracking-wider text-brand-olive-green">Donation Received </p>
                     </div>
@@ -143,7 +168,6 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
                         setAmount={setAmount}
                         onConnectWallet={handleConnectWallet}
                         onDonate={handleDonate}
-                        setSubmitted={setSubmitted}
                     />
                     <footer className="mt-6">
                         <p className="text-base font-bold tracking-wider text-olive-green">
@@ -159,8 +183,8 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
 
 // ... (CampaignImage and CampaignDetails components remain unchanged)
 
-const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onDonate, setSubmitted }) => (
-    <form onSubmit={onDonate}>
+const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onDonate }) => (
+    <form>
         <div className="mb-4">
             <button
                 type="button"
@@ -169,13 +193,13 @@ const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onD
             >
                 {wallet ? `Connected: ${wallet.slice(0, 4)}...${wallet.slice(-4)}` : "Connect Wallet"}
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 7.42927H17.7143C18.3205 7.42927 18.9019 7.67008 19.3305 8.09874C19.7592 8.52739 20 9.10877 20 9.71498V16.5721C20 17.1783 19.7592 17.7597 19.3305 18.1884C18.9019 18.617 18.3205 18.8578 17.7143 18.8578H6.28571C5.67951 18.8578 5.09812 18.617 4.66947 18.1884C4.24082 17.7597 4 17.1783 4 16.5721V7.42927ZM4 7.42927H16.5714V6.28641C16.5714 5.98331 16.451 5.69262 16.2367 5.47829C16.0224 5.26396 15.7317 5.14355 15.4286 5.14355H5.14286C4.83975 5.14355 4.54906 5.26396 4.33474 5.47829C4.12041 5.69262 4 5.98331 4 6.28641V7.42927Z" stroke="#3D4630" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4 7.42927H17.7143C18.3205 7.42927 18.9019 7.67008 19.3305 8.09874C19.7592 8.52739 20 9.10877 20 9.71498V16.5721C20 17.1783 19.7592 17.7597 19.3305 18.1884C18.9019 18.617 18.3205 18.8578 17.7143 18.8578H6.28571C5.67951 18.8578 5.09812 18.617 4.66947 18.1884C4.24082 17.7597 4 17.1783 4 16.5721V7.42927ZM4 7.42927H16.5714V6.28641C16.5714 5.98331 16.451 5.69262 16.2367 5.47829C16.0224 5.26396 15.7317 5.14355 15.4286 5.14355H5.14286C4.83975 5.14355 4.54906 5.26396 4.33474 5.47829C4.12041 5.69262 4 5.98331 4 6.28641V7.42927Z" stroke="#3D4630" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M16.5706 14.2867C17.2018 14.2867 17.7134 13.775 17.7134 13.1438C17.7134 12.5127 17.2018 12.001 16.5706 12.001C15.9394 12.001 15.4277 12.5127 15.4277 13.1438C15.4277 13.775 15.9394 14.2867 16.5706 14.2867Z" fill="#3D4630" />
                 </svg>
             </button>
         </div>
         {wallet && (
-            <p className="mb-4 text-brand-olive-green font-bold">Balance: {balance ? `${balance.toFixed(4)} SOL` : `${balance.toFixed(4)} SOL`}</p>
+            <p className="mb-4 text-brand-olive-green font-bold">Balance: {balance ? `${balance.toFixed(4)} SOL` : `0 SOL`}</p>
         )}
         <div className="mb-4">
             <Input
@@ -198,7 +222,7 @@ const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onD
             // type="submit"
             className="w-full py-3.5 mt-4 text-sm font-bold border border-olive-green rounded-full text-olive-green"
             // disabled={!wallet || !amount}
-            onClick={setSubmitted}
+            onClick={onDonate}
         >
             Donate Now
         </button>
