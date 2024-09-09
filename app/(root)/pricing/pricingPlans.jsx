@@ -2,7 +2,7 @@ import * as React from "react";
 
 const PlanFeature = ({ icon, text }) => (
     <div className="flex items-center gap-2 mt-2">
-        <img src={icon} alt="" className="w-4 h-4" />
+        <img src={icon} alt="icon" className="w-4 h-4" />
         <span className="text-base tracking-wide">{text}</span>
     </div>
 );

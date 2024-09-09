@@ -55,7 +55,7 @@ const ActionsSection = () => (
 const ActionItem = ({ label, iconUrl }) => (
     <button className="flex justify-between items-center w-full">
         <span>{label}</span>
-        <img src={iconUrl} alt="" className="w-6 h-6" />
+        <img src={iconUrl} alt="icon" className="w-6 h-6" />
     </button>
 );
 

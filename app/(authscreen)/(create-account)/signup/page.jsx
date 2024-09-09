@@ -34,6 +34,7 @@ const page = () => {
                     loading="lazy"
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/4afcf1048ae3f4852061b80f8ea5990ac5796d08b00ed5201f740025245bf9e8?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
                     className="object-contain w-5 aspect-square"
+                    alt='lazy'
                 />
                 Continue with Google
             </Button>

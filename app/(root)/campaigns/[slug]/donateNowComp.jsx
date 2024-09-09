@@ -257,7 +257,7 @@ const ConsentCheckboxes = () => (
     <fieldset className="mb-4">
         <legend className="sr-only">Consent Options</legend>
         <div className="flex items-center mb-2">
-            <Checkbox>Don't display my name publicly on the fundraiser.</Checkbox>
+            <Checkbox>Don&apos;t display my name publicly on the fundraiser.</Checkbox>
         </div>
         <div className="flex items-center">
             <Checkbox>Get occasional marketing updates from Raise. You may unsubscribe at any time.</Checkbox>

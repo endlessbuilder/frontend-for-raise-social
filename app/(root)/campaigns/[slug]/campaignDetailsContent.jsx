@@ -30,7 +30,7 @@ function CampaignDetailsContent() {
             <section className="opacity-80">
                 <h2 className="text-4xl mb-6 font-heading">Welcome to our fundraising campaign</h2>
                 <p className="text-2xl mb-6">
-                    We're dedicated to the preservation and protection of rare species of tigers. These magnificent creatures are on the brink of extinction due to habitat loss, poaching, and climate change. Our mission is to ensure that these majestic animals continue to thrive in the wild for generations to come.
+                    We&apos;re dedicated to the preservation and protection of rare species of tigers. These magnificent creatures are on the brink of extinction due to habitat loss, poaching, and climate change. Our mission is to ensure that these majestic animals continue to thrive in the wild for generations to come.
                 </p>
                 <p className="text-2xl mb-6">
                     By contributing to this cause, you are directly supporting efforts to safeguard tiger habitats, enforce anti-poaching laws, and fund research and conservation programs.
@@ -62,7 +62,7 @@ function CampaignDetailsContent() {
             <section>
                 <h2 className="text-4xl mb-6">Updates</h2>
                 <p className="text-2xl mb-6 opacity-65">
-                    We're dedicated to the preservation and protection of rare species of tigers. These magnificent creatures are on the brink of extinction due to habitat loss, poaching, and climate change. Our mission is to ensure that these majestic animals continue to thrive in the wild for generations to come.
+                    We&apos;re dedicated to the preservation and protection of rare species of tigers. These magnificent creatures are on the brink of extinction due to habitat loss, poaching, and climate change. Our mission is to ensure that these majestic animals continue to thrive in the wild for generations to come.
                 </p>
                 <p className="text-2xl mb-6 opacity-65">
                     By contributing to this cause, you are directly supporting efforts to safeguard tiger habitats, enforce anti-poaching laws, and fund research and conservation programs.

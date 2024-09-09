@@ -86,7 +86,7 @@ const FilterSection = () => (
 
 const CampaignItem = ({ title, amountRaised, progressPercentage, imageUrl }) => (
     <article className="flex gap-5">
-        <img src={imageUrl} alt="" className="w-[121px] h-[111px] object-cover" />
+        <img src={imageUrl} alt={imageUrl} className="w-[121px] h-[111px] object-cover" />
         <div className="flex-1">
             <h2 className="text-2xl font-bold tracking-wider uppercase text-brand-dark font-heading">
                 {title}
@@ -115,7 +115,7 @@ const ProgressBar = ({ percentage }) => (
 
 const ActionButton = ({ label, icon }) => (
     <button className="flex items-center px-5 py-2 border border-stone-700 rounded-full">
-        <img src={icon} alt="" className="w-3 h-3 mr-1.5" />
+        <img src={icon} alt="icon" className="w-3 h-3 mr-1.5" />
         {label}
     </button>
 );

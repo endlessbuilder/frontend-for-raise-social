@@ -50,7 +50,7 @@ const FilterButton = ({ label, active }) => (
         {label}
         <img
             src={active ? "https://cdn.builder.io/api/v1/image/assets/TEMP/309201eb428e6f4d3dff3f34747a9435b5fe85326f479a8c6216b9e360efcf0c?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded" : "https://cdn.builder.io/api/v1/image/assets/TEMP/ccac278d0ef377e94054026d6c595c3b231b072f9b1b1075b887ced9771d1a8b?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"}
-            alt=""
+            alt="filter"
             className="w-4 h-4 ml-1.5"
         />
     </button>
@@ -60,7 +60,7 @@ const SearchButton = () => (
     <button className="flex items-center py-2.5 px-6 rounded-full border border-zinc-800">
         <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/27b2199c95b1798528d613c3222163966746018565969d2010395a997d638cb3?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
-            alt=""
+            alt="search"
             className="w-[19px] h-[19px] mr-2.5"
         />
         Search
@@ -71,7 +71,7 @@ const DonationItem = ({ name, amount, time, transactionHash, imageUrl, expanded 
     <>
         <div className="flex justify-between items-start mt-8">
             <div className="flex items-start gap-3">
-                <img src={imageUrl} alt="" className="w-[50px] h-[50px] rounded-full" />
+                <img src={imageUrl} alt={imageUrl} className="w-[50px] h-[50px] rounded-full" />
                 <div>
                     <h2 className="text-2xl tracking-wider uppercase">{name}</h2>
                     <div className="flex gap-3.5 text-base">

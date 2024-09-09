@@ -42,7 +42,7 @@ const FeatureItem = ({ text }) => (
     <li className="flex items-start gap-1.5 text-xl tracking-wider">
         <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/e9f8f8930ab195d8f31d806539350577484a1967ef7ff00fa588bffadba60125"
-            alt=""
+            alt="feature"
             className="w-5 h-5"
         />
         <span>{text}</span>

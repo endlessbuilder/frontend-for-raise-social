@@ -59,7 +59,7 @@ function ValuesMissionAndVision() {
                     they care about most.
                     <br /><br />
                     Flesh that out the horse is out of the barn. We need to button up our
-                    approach who's responsible for the ask for this request? waste of
+                    approach who&apos;s responsible for the ask for this request? waste of
                     resources.
                 </p>
             </section>

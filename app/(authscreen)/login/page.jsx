@@ -69,6 +69,7 @@ const Page = () => {
                 loading="lazy"
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/2dc00ade95da09b368c1fef8bf0b3dc9966c324e821b245532ac1b2f21e73e3d?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
                 className="object-contain shrink-0 rounded-lg aspect-square w-[60px]"
+                alt='lazy'
               />
               <div className="self-start mt-2.5 basis-auto max-md:text-4xl">
                 Raise.
@@ -132,6 +133,7 @@ const Page = () => {
                 loading="lazy"
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/4afcf1048ae3f4852061b80f8ea5990ac5796d08b00ed5201f740025245bf9e8?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
                 className="object-contain w-5 aspect-square"
+                alt='lazy'
               />
               Continue with Google
             </Button>
@@ -147,6 +149,7 @@ const Page = () => {
               loading="lazy"
               srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
               className="object-cover absolute inset-0 size-full"
+              alt='lazy'
             />
             <div className="min-h-[450px] flex overflow-hidden relative flex-col px-11 pb-11 rounded-3xl max-md:px-5 max-md:max-w-full h-full justify-end">
               <div className="max-md:max-w-full">

@@ -34,7 +34,7 @@ function PartnersComponent() {
           <PartnerLogo key={index} {...partner} />
         ))}
       </div>
-      <img src="/images/globe.png" alt=""
+      <img src="/images/globe.png" alt="globe"
         className="w-[35%] absolute -bottom-3 -right-3"
       />
     </section>

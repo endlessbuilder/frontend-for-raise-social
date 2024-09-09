@@ -130,7 +130,7 @@ const DonationItem = ({ name, amount, time, transactionHash, imageUrl, expanded 
     <>
         <div className="flex justify-between items-start mt-8">
             <div className="flex items-start gap-3">
-                <img src={imageUrl} alt="" className="w-[50px] h-[50px] rounded-full" />
+                <img src={imageUrl} alt={imageUrl} className="w-[50px] h-[50px] rounded-full" />
                 <div>
                     <h2 className="text-3xl tracking-wider uppercase font-heading">{name}</h2>
                     <div className="flex gap-3.5 text-base">

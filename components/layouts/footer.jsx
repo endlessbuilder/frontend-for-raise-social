@@ -33,16 +33,19 @@ const Footer = () => {
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/df6f575bdd2bf72ccc88c033011338f34bfaf5cb07a58d913434638417bb598f?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
                         className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
+                        alt='lazy'
                     />
                     <img
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe585ecbf9c997be3746f2367b2c949aaaf887bdb92296e38102b8615de1b0e4?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
                         className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
+                        alt='lazy'
                     />
                     <img
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/993cd7dca3065de200b93e8de24d9c1051a8e5a03147d466e5dcf6ce7f229f86?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
                         className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
+                        alt='lazy'
                     />
                 </div>
             </div>
