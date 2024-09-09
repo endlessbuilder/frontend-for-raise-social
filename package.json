@@ -9,7 +9,8 @@
 		"lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
 	},
 	"dependencies": {
-		"@coral-xyz/anchor": "^0.30.1",
+
+		"@coral-xyz/anchor": "^0.29.0",
 		"@nextui-org/autocomplete": "^2.1.5",
 		"@nextui-org/avatar": "^2.0.32",
 		"@nextui-org/button": "2.0.37",
