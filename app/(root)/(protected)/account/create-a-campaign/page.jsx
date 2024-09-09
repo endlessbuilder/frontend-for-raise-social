@@ -66,7 +66,6 @@ const Page = () => {
 
   }, []);
 
-
   // Helper function to extract plain text from HTML
   const getInnerText = (html) => {
     const tempDiv = document.createElement('div');
@@ -103,7 +102,6 @@ const Page = () => {
       console.error("Error fetching balance:", error);
     }
   };
-
 
   // const validateInputs = () => {
   //   if (
