@@ -85,7 +85,7 @@ const Header = () => {
         />
         <NavbarBrand className="gap-4">
           {/* <AcmeLogo /> */}
-          <Image width={45} height={45} src="/images/logo.png" />
+          <Image width={45} height={45} src="/images/logo.png" alt="logo" />
           <p className="font-bold text-inherit text-white text-2xl mt-2">
             Raise
           </p>
