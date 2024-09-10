@@ -1,31 +1,24 @@
 {
   "env": {
-    "browser": true,
-    "node": true,
-    "es2021": true,
-    "jasmine": true
+      "node": true,
+      "es2021": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "next"
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 12,
-    "sourceType": "module"
+      "ecmaVersion": 12,
+      "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint",
-    "prettier"
+      "@typescript-eslint",
+      "prettier",
+      "next"
   ],
   "rules": {
-    "prettier/prettier": "error",
-    "no-undef": "off"  // Disable the no-undef rule if it causes issues with browser globals
-  },
-  "globals": {
-    "localStorage": "readonly",
-    "window": "readonly"
+      "prettier/prettier": "error"
   }
 }
