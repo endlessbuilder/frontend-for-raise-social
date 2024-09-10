@@ -22,12 +22,9 @@ const DonationThankYouComponent = () => {
           alt="Donation received icon"
           className="mx-auto mt-10 w-20 h-20 rounded-full"
         />
-        <h2 className="mt-5 text-xl font-bold tracking-wider text-stone-700">
-          Donation Received
-        </h2>
+        <h2 className="mt-5 text-xl font-bold tracking-wider text-stone-700">Donation Received</h2>
         <p className="mt-9 text-base font-bold tracking-wider text-stone-700">
-          Thank you Mr. Donor for helping our camp in saving rare species of
-          tigers.
+          Thank you Mr. Donor for helping our camp in saving rare species of tigers.
         </p>
       </section>
 
@@ -36,8 +33,7 @@ const DonationThankYouComponent = () => {
           Transaction Hash: 34jkl.............4343
         </p>
         <p className="mt-2 text-base font-bold tracking-wider text-stone-700">
-          We guarantee you a full refund for up to a year in the rare case that
-          fraud occurs.
+          We guarantee you a full refund for up to a year in the rare case that fraud occurs.
         </p>
       </footer>
     </main>

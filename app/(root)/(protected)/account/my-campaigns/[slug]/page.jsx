@@ -6,9 +6,7 @@ const page = () => {
   return (
     <div>
       <div className="flex justify-between mb-6">
-        <h1 className="heading-2 w-1/2 flex-grow">
-          Donations for the Rare species of tigers
-        </h1>
+        <h1 className="heading-2 w-1/2 flex-grow">Donations for the Rare species of tigers</h1>
         <div className="flex gap-4">
           <Button
             variant="bordered"

@@ -13,11 +13,11 @@ const Sidebar = ({ navItems }) => {
         const response = await fetch(`${SERVER_IP}/api/logout`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            email: localStorage.getItem('userEmail'),
-          }),
+            email: localStorage.getItem('userEmail')
+          })
         });
 
         if (response.ok) {
@@ -65,10 +65,7 @@ const Sidebar = ({ navItems }) => {
             d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m0-3-3-3m0 0-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
           />
         </svg>
-        <a
-          className="font-heading font-bold uppercase text-3xl"
-          onClick={handleLogout}
-        >
+        <a className="font-heading font-bold uppercase text-3xl" onClick={handleLogout}>
           Logout
         </a>
       </div>

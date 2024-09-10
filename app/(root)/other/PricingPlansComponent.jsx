@@ -3,13 +3,10 @@ import React from 'react';
 const PricingPlansComponent = () => {
   return (
     <main className="bg-amber-50 px-10 pt-20 pb-80">
-      <h1 className="text-4xl font-bold tracking-widest uppercase text-zinc-800">
-        Account Plans
-      </h1>
+      <h1 className="text-4xl font-bold tracking-widest uppercase text-zinc-800">Account Plans</h1>
       <p className="mt-4 text-2xl font-bold text-stone-700 max-w-[997px]">
-        We have introduced four plans for users to increase the visibility of
-        their campaigns which allows users to make their fundraiser popular
-        around the globe to achieve their goal sooner.
+        We have introduced four plans for users to increase the visibility of their campaigns which
+        allows users to make their fundraiser popular around the globe to achieve their goal sooner.
       </p>
       <section className="mt-11 flex gap-5 flex-wrap">
         <PlanCard
@@ -19,7 +16,7 @@ const PricingPlansComponent = () => {
           features={[
             'Basic Analytics',
             'General Campaign Visibility',
-            'General Campaigns Rendering',
+            'General Campaigns Rendering'
           ]}
           buttonText="Current Plan"
           isCurrentPlan={true}
@@ -28,15 +25,14 @@ const PricingPlansComponent = () => {
           title="Basic Plan"
           price={
             <>
-              <span className="text-5xl">10.00</span>{' '}
-              <span className="text-xl">SOL/month</span>
+              <span className="text-5xl">10.00</span> <span className="text-xl">SOL/month</span>
             </>
           }
           description="Automatically deducted after your campaign reaches to it's goal."
           features={[
             'Basic Analytics',
             'General Campaign Visibility',
-            'General Campaigns Rendering',
+            'General Campaigns Rendering'
           ]}
           buttonText="Upgrade"
         />
@@ -44,15 +40,14 @@ const PricingPlansComponent = () => {
           title="Premium plan"
           price={
             <>
-              <span className="text-5xl">18.25</span>{' '}
-              <span className="text-xl">SOL/month</span>
+              <span className="text-5xl">18.25</span> <span className="text-xl">SOL/month</span>
             </>
           }
           description="Automatically deducted after your campaign reaches to it's goal."
           features={[
             'Basic Analytics',
             'General Campaign Visibility',
-            'General Campaigns Rendering',
+            'General Campaigns Rendering'
           ]}
           buttonText="Upgrade"
         />
@@ -60,15 +55,14 @@ const PricingPlansComponent = () => {
           title="Enterprise Plan"
           price={
             <>
-              <span className="text-5xl">42.00</span>{' '}
-              <span className="text-xl">SOL/month</span>
+              <span className="text-5xl">42.00</span> <span className="text-xl">SOL/month</span>
             </>
           }
           description="Automatically deducted after your campaign reaches to it's goal."
           features={[
             'Basic Analytics',
             'General Campaign Visibility',
-            'General Campaigns Rendering',
+            'General Campaigns Rendering'
           ]}
           buttonText="Upgrade"
         />
@@ -82,7 +76,7 @@ const PlanCard = ({
   price,
   description,
   features,
-  buttonText,
+  buttonText
   // isCurrentPlan,
 }) => (
   <article className="flex flex-col w-full sm:w-3/12 font-bold bg-yellow-50 border border-solid border-black border-opacity-20 text-stone-700">
@@ -90,9 +84,7 @@ const PlanCard = ({
       {title}
     </header>
     <div className="flex flex-col items-start p-4 mt-2 w-full text-base">
-      <div className="text-5xl sm:text-7xl uppercase tracking-widest mb-2.5">
-        {price}
-      </div>
+      <div className="text-5xl sm:text-7xl uppercase tracking-widest mb-2.5">{price}</div>
       <p className="mb-8">{description}</p>
       {features.map((feature, index) => (
         <FeatureItem key={index} text={feature} />

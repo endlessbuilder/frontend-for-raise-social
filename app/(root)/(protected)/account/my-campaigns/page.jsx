@@ -1,21 +1,9 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from '@nextui-org/table';
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/table';
 
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from '@nextui-org/dropdown';
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@nextui-org/dropdown';
 import { Pagination } from '@nextui-org/pagination';
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
@@ -32,7 +20,7 @@ const mockData = [
     createdAt: '2023-08-15',
     goal: 10000,
     bannerImage: '/eco-banner.jpg',
-    kycStatus: 'Verified',
+    kycStatus: 'Verified'
   },
   {
     id: 2,
@@ -41,8 +29,8 @@ const mockData = [
     createdAt: '2023-09-01',
     goal: 5000,
     bannerImage: '/tech-kids.jpg',
-    kycStatus: 'Pending',
-  },
+    kycStatus: 'Pending'
+  }
   // Add more mock data as needed
 ];
 
@@ -52,16 +40,14 @@ const columns = [
   { name: 'CREATED AT', uid: 'createdAt' },
   { name: 'GOAL', uid: 'goal' },
   { name: 'KYC STATUS', uid: 'kycStatus' },
-  { name: 'ACTIONS', uid: 'actions' },
+  { name: 'ACTIONS', uid: 'actions' }
 ];
 
 const CampaignDataTable = () => {
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState(
-    new Set(['All']),
-  );
+  const [selectedCategories, setSelectedCategories] = useState(new Set(['All']));
   const [selectedKycStatus, setSelectedKycStatus] = useState(new Set(['All']));
 
   setRowsPerPage(10);
@@ -71,20 +57,16 @@ const CampaignDataTable = () => {
 
     if (searchTerm) {
       filtered = filtered.filter((item) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     if (!selectedCategories.has('All')) {
-      filtered = filtered.filter((item) =>
-        selectedCategories.has(item.category),
-      );
+      filtered = filtered.filter((item) => selectedCategories.has(item.category));
     }
 
     if (!selectedKycStatus.has('All')) {
-      filtered = filtered.filter((item) =>
-        selectedKycStatus.has(item.kycStatus),
-      );
+      filtered = filtered.filter((item) => selectedKycStatus.has(item.kycStatus));
     }
 
     return filtered;
@@ -117,9 +99,7 @@ const CampaignDataTable = () => {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              USD
-            </p>
+            <p className="text-bold text-tiny capitalize text-default-400">USD</p>
           </div>
         );
       case 'kycStatus':
@@ -204,7 +184,7 @@ const CampaignDataTable = () => {
         classNames={{
           wrapper: 'rounded-none',
           tr: 'rounded-none',
-          th: '!rounded-none',
+          th: '!rounded-none'
         }}
         aria-label="Example table with custom cells"
         bottomContent={
@@ -216,7 +196,7 @@ const CampaignDataTable = () => {
               size="lg"
               classNames={{
                 item: '!rounded-none border border-brand-olive-green bg-transparent hover:!bg-transparent',
-                cursor: '!rounded-none bg-brand-olive-green',
+                cursor: '!rounded-none bg-brand-olive-green'
               }}
             />
           </div>
@@ -224,10 +204,7 @@ const CampaignDataTable = () => {
       >
         <TableHeader columns={columns} className="rounded-none">
           {(column) => (
-            <TableColumn
-              key={column.uid}
-              align={column.uid === 'actions' ? 'center' : 'start'}
-            >
+            <TableColumn key={column.uid} align={column.uid === 'actions' ? 'center' : 'start'}>
               {column.name}
             </TableColumn>
           )}
@@ -235,9 +212,7 @@ const CampaignDataTable = () => {
         <TableBody items={items}>
           {(item) => (
             <TableRow key={item.id}>
-              {(columnKey) => (
-                <TableCell>{renderCell(item, columnKey)}</TableCell>
-              )}
+              {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
             </TableRow>
           )}
         </TableBody>

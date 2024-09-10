@@ -45,7 +45,7 @@ const Page = () => {
         setLoading(true);
         const [categoriesRes, locationsRes] = await Promise.all([
           axios.get(`${SERVER_IP}/api/category`),
-          axios.get(`${SERVER_IP}/api/location`),
+          axios.get(`${SERVER_IP}/api/location`)
         ]);
 
         setCategories(categoriesRes.data.category || []);
@@ -117,15 +117,11 @@ const Page = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${FSERVER_IP}/api/file/upload`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        },
-      );
+      const response = await axios.post(`${FSERVER_IP}/api/file/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
 
       // Ensure the response contains the uploaded file information
       const uploadedFiles = response.data.uploaded;
@@ -141,8 +137,7 @@ const Page = () => {
       throw error;
     }
   };
-  const campaignImgReader =
-    typeof window !== 'undefined' ? new FileReader() : null;
+  const campaignImgReader = typeof window !== 'undefined' ? new FileReader() : null;
   campaignImgReader.onloadend = function () {
     // const base64String = campaignImgReader.result.split(', ')[1]; // Remove data:image/...;base64, part
     // console.log(campaignImgReader.result);
@@ -209,16 +204,13 @@ const Page = () => {
         kyc: proofDocumentIds,
         text: getInnerText(description),
         createrId: userID,
-        totalAmount: '0',
+        totalAmount: '0'
       };
 
       console.log(formData);
 
       // Send form data to the server
-      const response = await axios.post(
-        `${SERVER_IP}/api/campaign/create`,
-        formData,
-      );
+      const response = await axios.post(`${SERVER_IP}/api/campaign/create`, formData);
       console.log('Campaign created successfully:', response.data);
 
       // if (!wallet || !amount) await handleConnectWallet();
@@ -350,13 +342,11 @@ const Page = () => {
             label="How much fund do you want to raise? (Goal)"
             radius="sm"
             onChange={(e) => setAmount(e.target.value)}
-            endContent={
-              <p className="font-heading text-xl text-brand-dark">SOL</p>
-            }
+            endContent={<p className="font-heading text-xl text-brand-dark">SOL</p>}
           />
           <DragDropUpload
             acceptedFormats={{
-              'image/*': ['.jpeg', '.png', '.jpg', '.gif'],
+              'image/*': ['.jpeg', '.png', '.jpg', '.gif']
             }}
             isMultiple={false}
             label="Campaign Image"
@@ -372,7 +362,7 @@ const Page = () => {
           <DragDropUpload
             acceptedFormats={{
               'image/*': ['.jpeg', '.png', '.jpg', '.gif'],
-              'application/*': ['.pdf'],
+              'application/*': ['.pdf']
             }}
             isMultiple={true}
             label="Proof Document"

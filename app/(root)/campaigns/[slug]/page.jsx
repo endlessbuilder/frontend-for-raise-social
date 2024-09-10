@@ -16,9 +16,7 @@ const Page = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const campaignsRes = await axios.get(
-          `${SERVER_IP}/api/campaign/${params.slug}`,
-        );
+        const campaignsRes = await axios.get(`${SERVER_IP}/api/campaign/${params.slug}`);
         setCampaignData(campaignsRes.data.data); // Assuming the response has "data"
         console.log('Fetched Campaign:', campaignsRes.data.data);
       } catch (error) {

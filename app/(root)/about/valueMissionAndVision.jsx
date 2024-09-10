@@ -17,23 +17,23 @@ function ValuesMissionAndVision() {
     {
       imgSrc:
         'https://cdn.builder.io/api/v1/image/assets/TEMP/479b4e5db135d39767a5fe05d2b666bbcd0e2ad9eca785961d631c04c27987c5',
-      title: 'Based on Web3',
+      title: 'Based on Web3'
     },
     {
       imgSrc:
         'https://cdn.builder.io/api/v1/image/assets/TEMP/01ab03e8ca601468ef72b14b782a0ed9de6a6e1d5740e47639a367bb6dca0754',
-      title: 'No Fee for Campaigns',
+      title: 'No Fee for Campaigns'
     },
     {
       imgSrc:
         'https://cdn.builder.io/api/v1/image/assets/TEMP/a951f03168017459f6d88d1bb73e5e93b4df18d602e6dcbb62921f3e65fef30e',
-      title: 'Worldwide Community',
+      title: 'Worldwide Community'
     },
     {
       imgSrc:
         'https://cdn.builder.io/api/v1/image/assets/TEMP/10a2467151efeca5aee1c3098918fbc58284c1de38b6c82743d1fdea694fff41',
-      title: 'Active Support',
-    },
+      title: 'Active Support'
+    }
   ];
 
   return (
@@ -43,8 +43,8 @@ function ValuesMissionAndVision() {
           Our Values
         </h2>
         <p className="text-xl lg:text-2xl font-bold tracking-wide text-zinc-800 mb-12">
-          See what makes raise different from others and why you should choose
-          raise for your campaign.
+          See what makes raise different from others and why you should choose raise for your
+          campaign.
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {values.map((value, index) => (
@@ -58,14 +58,12 @@ function ValuesMissionAndVision() {
           Mission and Vision
         </h2>
         <p className="text-xl lg:text-2xl font-bold tracking-wide">
-          Together, we are building a future where everyone has the ability to
-          make a meaningful difference for the people, causes, and communities
-          they care about most.
+          Together, we are building a future where everyone has the ability to make a meaningful
+          difference for the people, causes, and communities they care about most.
           <br />
           <br />
-          Flesh that out the horse is out of the barn. We need to button up our
-          approach who&apos;s responsible for the ask for this request? waste of
-          resources.
+          Flesh that out the horse is out of the barn. We need to button up our approach who&apos;s
+          responsible for the ask for this request? waste of resources.
         </p>
       </section>
     </div>

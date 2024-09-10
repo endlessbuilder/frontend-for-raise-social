@@ -16,8 +16,7 @@ const DonateComp = () => {
       <DonationForm />
       <footer className="mt-6">
         <p className="text-base font-bold tracking-wider text-stone-700">
-          We guarantee you a full refund for up to a year in the rare case that
-          fraud occurs.
+          We guarantee you a full refund for up to a year in the rare case that fraud occurs.
         </p>
       </footer>
     </main>
@@ -99,8 +98,7 @@ const ConsentCheckboxes = () => (
         htmlFor="marketingConsent"
         className="text-base font-bold tracking-wider text-stone-700"
       >
-        Get occasional marketing updates from Raise. You may unsubscribe at any
-        time.
+        Get occasional marketing updates from Raise. You may unsubscribe at any time.
       </label>
     </div>
   </fieldset>

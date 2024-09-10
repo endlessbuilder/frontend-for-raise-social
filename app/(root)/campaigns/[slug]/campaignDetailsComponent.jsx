@@ -1,13 +1,7 @@
 'use client';
 import * as React from 'react';
 import CampaignDetailsContent from './campaignDetailsContent';
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  useDisclosure,
-} from '@nextui-org/modal';
+import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@nextui-org/modal';
 import { Button } from '@nextui-org/button';
 import DonateNowComp from './donateNowComp';
 import { Avatar } from '@nextui-org/avatar';
@@ -29,16 +23,10 @@ const UserProfile = ({ image, name, location }) => (
 const DonationItem = ({ image, name, amount, label }) => (
   <div className="mb-4 pb-4 border-b border-zinc-800">
     <div className="flex items-center gap-3">
-      <img
-        src={image}
-        alt={name}
-        className="w-12 h-12 rounded-full object-cover"
-      />
+      <img src={image} alt={name} className="w-12 h-12 rounded-full object-cover" />
       <Avatar showFallback name={name} src={image} />
       <div>
-        <h4 className="text-xl font-heading font-bold !tracking-wide">
-          {name}
-        </h4>
+        <h4 className="text-xl font-heading font-bold !tracking-wide">{name}</h4>
         <div className="text-sm font-medium flex gap-4">
           <span>{amount} SOL</span>
           <span className="opacity-50">{label}</span>
@@ -56,16 +44,15 @@ function CampaignDetailsComponent({ campaignData }) {
   const {
     isOpen: donationListIsOpen,
     onOpen: donationListOnOpen,
-    onOpenChange: donationListOnOpenChange,
+    onOpenChange: donationListOnOpenChange
   } = useDisclosure();
   const {
     isOpen: donateIsOpen,
     onOpen: donateOnOpen,
-    onOpenChange: donateOnOpenChange,
+    onOpenChange: donateOnOpenChange
   } = useDisclosure();
 
-  const progressPercentage =
-    (campaignData.totalAmount / campaignData.amount) * 100;
+  const progressPercentage = (campaignData.totalAmount / campaignData.amount) * 100;
 
   const [donorListType, setDonorListType] = useState('top');
 
@@ -101,8 +88,7 @@ function CampaignDetailsComponent({ campaignData }) {
       <aside className="w-[350px] bg-brand-lemon-yellow p-8 pt-[150px] h-screen sticky top-0 overflow-auto">
         <div className="">
           <h2 className="text-6xl font-heading font-bold text-stone-700 mb-4">
-            {campaignData.totalAmount}{' '}
-            <span className="text-2xl font-body">SOL</span>
+            {campaignData.totalAmount} <span className="text-2xl font-body">SOL</span>
           </h2>
           <p className="text-xl font-bold text-stone-700 mb-2">
             raised of {campaignData.amount} SOL.
@@ -114,9 +100,7 @@ function CampaignDetailsComponent({ campaignData }) {
             ></div>
           </div>
 
-          <h3 className="text-xl font-bold text-stone-700 mb-4">
-            Donations for this Campaign
-          </h3>
+          <h3 className="text-xl font-bold text-stone-700 mb-4">Donations for this Campaign</h3>
           {/* {campaignData.filteredDonors.recentDonors
       .slice(0, 3)
       .map((donor, index) => (
@@ -145,9 +129,7 @@ function CampaignDetailsComponent({ campaignData }) {
             See All
           </Button>
 
-          <h3 className="text-xl font-bold text-stone-700 mb-4">
-            Share this Fundraiser
-          </h3>
+          <h3 className="text-xl font-bold text-stone-700 mb-4">Share this Fundraiser</h3>
           <div className="flex gap-2 mb-8">
             <ShareButton icon="https://cdn.builder.io/api/v1/image/assets/TEMP/37e35f709513915e58e6aed26be95bb58c09d1e71d0c8c5d8b89b50f032fdc52" />
             <ShareButton icon="https://cdn.builder.io/api/v1/image/assets/TEMP/20a90ca2e1f62331b0310ba6e1f2b992773ba80b82c3979f2f965eeb9415ceda" />
@@ -173,7 +155,7 @@ function CampaignDetailsComponent({ campaignData }) {
         size="2xl"
         classNames={{
           base: 'rounded-none bg-brand-lemon-yellow py-4 px-2',
-          closeButton: 'top-2.5 right-2.5 hover:bg-brand-transparent',
+          closeButton: 'top-2.5 right-2.5 hover:bg-brand-transparent'
         }}
       >
         <ModalContent>
@@ -223,22 +205,18 @@ function CampaignDetailsComponent({ campaignData }) {
                           label={new Date(donor.dateTime).toLocaleString()}
                         />
                       ))
-                    : campaignData.filteredDonors.recentDonors.map(
-                        (donor, index) => (
-                          <DonationItem
-                            key={index}
-                            image={`https://example.com/avatars/user${index + 1}.jpg`}
-                            name={donor.name}
-                            amount={donor.amount}
-                            label={new Date(donor.dateTime).toLocaleString()}
-                          />
-                        ),
-                      )}
+                    : campaignData.filteredDonors.recentDonors.map((donor, index) => (
+                        <DonationItem
+                          key={index}
+                          image={`https://example.com/avatars/user${index + 1}.jpg`}
+                          name={donor.name}
+                          amount={donor.amount}
+                          label={new Date(donor.dateTime).toLocaleString()}
+                        />
+                      ))}
                 </div>
 
-                <h3 className="text-xl font-bold text-stone-700 mb-4">
-                  Share this Fundraiser
-                </h3>
+                <h3 className="text-xl font-bold text-stone-700 mb-4">Share this Fundraiser</h3>
 
                 <div className="flex justify-between items-center">
                   <div className="flex gap-3">
@@ -272,16 +250,14 @@ function CampaignDetailsComponent({ campaignData }) {
         size="2xl"
         classNames={{
           base: 'rounded-none bg-brand-lemon-yellow py-4 px-2',
-          closeButton: 'top-2.5 right-2.5 hover:bg-brand-transparent',
+          closeButton: 'top-2.5 right-2.5 hover:bg-brand-transparent'
         }}
       >
         <ModalContent>
           {() => (
             <>
               <ModalHeader className="flex flex-col gap-1 heading-2 text-brand-olive-green">
-                {isSubmitted
-                  ? 'Thank you for your donation From'
-                  : "You're supporting"}
+                {isSubmitted ? 'Thank you for your donation From' : "You're supporting"}
               </ModalHeader>
               <ModalBody>
                 <DonateNowComp

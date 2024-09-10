@@ -5,9 +5,7 @@ const CampaignListComponent = () => {
   return (
     <main className="bg-stone-300 max-w-[771px] p-8 pb-28">
       <header className="flex justify-between items-center font-bold">
-        <h1 className="text-3xl tracking-widest uppercase text-zinc-800">
-          Your Campaigns
-        </h1>
+        <h1 className="text-3xl tracking-widest uppercase text-zinc-800">Your Campaigns</h1>
         <Link
           className="px-6 py-3.5 text-base text-amber-50 bg-stone-700 rounded-full"
           href="/account/create-a-campaign"
@@ -69,25 +67,12 @@ const SearchButton = () => (
   </button>
 );
 
-const CampaignItem = ({
-  title,
-  amountRaised,
-  progressPercentage,
-  imageUrl,
-}) => (
+const CampaignItem = ({ title, amountRaised, progressPercentage, imageUrl }) => (
   <article className="flex gap-5">
-    <img
-      src={imageUrl}
-      alt={imageUrl}
-      className="w-[121px] h-[111px] object-cover"
-    />
+    <img src={imageUrl} alt={imageUrl} className="w-[121px] h-[111px] object-cover" />
     <div className="flex-1">
-      <h2 className="text-2xl font-bold tracking-wider uppercase text-stone-700">
-        {title}
-      </h2>
-      <p className="text-base font-bold tracking-wider text-stone-700">
-        Raised {amountRaised}
-      </p>
+      <h2 className="text-2xl font-bold tracking-wider uppercase text-stone-700">{title}</h2>
+      <p className="text-base font-bold tracking-wider text-stone-700">Raised {amountRaised}</p>
       <ProgressBar percentage={progressPercentage} />
       <div className="flex gap-1.5 mt-3.5 text-sm font-bold">
         <ActionButton
@@ -109,10 +94,7 @@ const CampaignItem = ({
 
 const ProgressBar = ({ percentage }) => (
   <div className="mt-1.5 border border-stone-700">
-    <div
-      className="bg-stone-700 bg-opacity-80 h-[7px]"
-      style={{ width: `${percentage}%` }}
-    />
+    <div className="bg-stone-700 bg-opacity-80 h-[7px]" style={{ width: `${percentage}%` }} />
   </div>
 );
 

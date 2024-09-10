@@ -4,25 +4,19 @@ import * as React from 'react';
 
 const ContactInfo = () => (
   <div className="mb-12">
-    <h2 className="text-3xl font-bold tracking-widest uppercase mb-4 font-heading">
-      Contact Info
-    </h2>
+    <h2 className="text-3xl font-bold tracking-widest uppercase mb-4 font-heading">Contact Info</h2>
     <p className="text-xl">Email Address: contact@raise.social</p>
     <p className="text-xl mt-2">Phone Number: +91-98232893732</p>
-    <p className="text-xl mt-2">
-      Address: 3-2-1/d, Beside Kumar Theatre, Kachiguda
-    </p>
+    <p className="text-xl mt-2">Address: 3-2-1/d, Beside Kumar Theatre, Kachiguda</p>
   </div>
 );
 
 const ContactForm = () => (
   <form className="bg-brand-lemon-yellow p-8">
-    <h2 className="text-3xl font-bold tracking-widest uppercase mb-4 font-heading">
-      Contact Form
-    </h2>
+    <h2 className="text-3xl font-bold tracking-widest uppercase mb-4 font-heading">Contact Form</h2>
     <p className="text-xl mb-6">
-      If you have any questions or queries feel free to fill this form. Our team
-      will respond to your message within a short period of time.
+      If you have any questions or queries feel free to fill this form. Our team will respond to
+      your message within a short period of time.
     </p>
     <Input
       size="lg"
@@ -32,7 +26,7 @@ const ContactForm = () => (
       radius="sm"
       className="mb-5"
       classNames={{
-        inputWrapper: 'border border-brand-dark',
+        inputWrapper: 'border border-brand-dark'
       }}
     />
     <div className="grid grid-cols-2 mb-5 gap-5">
@@ -43,7 +37,7 @@ const ContactForm = () => (
         type="text"
         radius="sm"
         classNames={{
-          inputWrapper: 'border border-brand-dark',
+          inputWrapper: 'border border-brand-dark'
         }}
       />
       <Input
@@ -53,7 +47,7 @@ const ContactForm = () => (
         type="text"
         radius="sm"
         classNames={{
-          inputWrapper: 'border border-brand-dark',
+          inputWrapper: 'border border-brand-dark'
         }}
       />
     </div>
@@ -63,7 +57,7 @@ const ContactForm = () => (
       radius="sm"
       className="mb-5"
       classNames={{
-        inputWrapper: 'border border-brand-dark',
+        inputWrapper: 'border border-brand-dark'
       }}
     />
     <div className="flex justify-end">

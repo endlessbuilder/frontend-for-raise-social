@@ -68,7 +68,7 @@ const FilterSection = () => (
           { key: 'shark', label: 'Shark' },
           { key: 'whale', label: 'Whale' },
           { key: 'otter', label: 'Otter' },
-          { key: 'crocodile', label: 'Crocodile' },
+          { key: 'crocodile', label: 'Crocodile' }
         ]}
         icon={
           <svg
@@ -102,12 +102,7 @@ const FilterSection = () => (
             stroke="#3D4630"
             strokeWidth="2"
           />
-          <path
-            d="M20 20L17 17"
-            stroke="#3D4630"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
+          <path d="M20 20L17 17" stroke="#3D4630" strokeWidth="2" strokeLinecap="round" />
         </svg>
       }
       size="lg"
@@ -115,31 +110,20 @@ const FilterSection = () => (
       placeholder="Search"
       radius="full"
       classNames={{
-        inputWrapper: 'border-brand-olive-green',
+        inputWrapper: 'border-brand-olive-green'
       }}
     />
   </div>
 );
 
-const CampaignItem = ({
-  title,
-  amountRaised,
-  progressPercentage,
-  imageUrl,
-}) => (
+const CampaignItem = ({ title, amountRaised, progressPercentage, imageUrl }) => (
   <article className="flex gap-5">
-    <img
-      src={imageUrl}
-      alt={imageUrl}
-      className="w-[121px] h-[111px] object-cover"
-    />
+    <img src={imageUrl} alt={imageUrl} className="w-[121px] h-[111px] object-cover" />
     <div className="flex-1">
       <h2 className="text-2xl font-bold tracking-wider uppercase text-brand-dark font-heading">
         {title}
       </h2>
-      <p className="text-base font-bold tracking-wider text-brand-dark">
-        Raised {amountRaised}
-      </p>
+      <p className="text-base font-bold tracking-wider text-brand-dark">Raised {amountRaised}</p>
       <ProgressBar percentage={progressPercentage} />
       <div className="flex gap-1.5 mt-3.5 text-sm font-bold">
         <ActionButton
@@ -161,10 +145,7 @@ const CampaignItem = ({
 
 const ProgressBar = ({ percentage }) => (
   <div className="mt-1.5 border border-stone-700">
-    <div
-      className="bg-stone-700 bg-opacity-80 h-[7px]"
-      style={{ width: `${percentage}%` }}
-    />
+    <div className="bg-stone-700 bg-opacity-80 h-[7px]" style={{ width: `${percentage}%` }} />
   </div>
 );
 

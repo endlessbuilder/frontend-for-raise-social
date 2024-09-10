@@ -12,7 +12,7 @@ const page = () => {
       </div>
       <DragDropUpload
         acceptedFormats={{
-          'image/*': ['.jpeg', '.png', '.jpg', '.gif'],
+          'image/*': ['.jpeg', '.png', '.jpg', '.gif']
         }}
         isMultiple={false}
         label="Profile Picture"
@@ -24,7 +24,7 @@ const page = () => {
         radius="sm"
         className="my-5"
         classNames={{
-          inputWrapper: 'border border-brand-dark',
+          inputWrapper: 'border border-brand-dark'
         }}
       />
       <Input
@@ -34,7 +34,7 @@ const page = () => {
         radius="sm"
         className="mb-5"
         classNames={{
-          inputWrapper: 'border border-brand-dark',
+          inputWrapper: 'border border-brand-dark'
         }}
       />
       <Button

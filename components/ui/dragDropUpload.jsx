@@ -13,13 +13,13 @@ const DragDropUpload = ({ acceptedFormats, isMultiple, label, onChange }) => {
         onChange(acceptedFiles); // Notify parent component
       }
     },
-    [onChange],
+    [onChange]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: acceptedFormats,
-    multiple: isMultiple,
+    multiple: isMultiple
   });
 
   useEffect(() => {
@@ -42,10 +42,7 @@ const DragDropUpload = ({ acceptedFormats, isMultiple, label, onChange }) => {
         {files.length > 0 && (
           <div className="mt-4">
             {files.map((file, index) => (
-              <div
-                key={index}
-                className="flex items-center text-sm text-gray-600"
-              >
+              <div key={index} className="flex items-center text-sm text-gray-600">
                 <File className="mr-2 h-4 w-4" />
                 {file.name}
               </div>

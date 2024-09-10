@@ -19,12 +19,12 @@ const Page = () => {
       const response = await fetch(`${SERVER_IP}/api/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           email,
-          password,
-        }),
+          password
+        })
       });
 
       // Check if response is JSON
@@ -71,9 +71,7 @@ const Page = () => {
                 className="object-contain shrink-0 rounded-lg aspect-square w-[60px]"
                 alt="lazy"
               />
-              <div className="self-start mt-2.5 basis-auto max-md:text-4xl">
-                Raise.
-              </div>
+              <div className="self-start mt-2.5 basis-auto max-md:text-4xl">Raise.</div>
             </div>
 
             <div className="self-start mt-12 text-6xl uppercase max-md:mt-10 max-md:max-w-full max-md:text-4xl font-heading mb-8">
@@ -90,7 +88,7 @@ const Page = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 classNames={{
-                  inputWrapper: 'border border-brand-dark',
+                  inputWrapper: 'border border-brand-dark'
                 }}
               />
               <Input
@@ -103,7 +101,7 @@ const Page = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 classNames={{
-                  inputWrapper: 'border border-brand-dark',
+                  inputWrapper: 'border border-brand-dark'
                 }}
               />
               {error && <p className="text-red-500 mb-5">{error}</p>}
@@ -155,8 +153,8 @@ const Page = () => {
             />
             <div className="min-h-[450px] flex overflow-hidden relative flex-col px-11 pb-11 rounded-3xl max-md:px-5 max-md:max-w-full h-full justify-end">
               <div className="max-md:max-w-full">
-                Raise allows you to create online fundraising campaigns
-                effortlessly with our easy-to-use tools.
+                Raise allows you to create online fundraising campaigns effortlessly with our
+                easy-to-use tools.
               </div>
             </div>
           </div>

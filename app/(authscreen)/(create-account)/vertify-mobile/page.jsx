@@ -1,11 +1,7 @@
 'use client';
 import { Button } from '@nextui-org/button';
 import React from 'react';
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from '@/components/ui/otpInput';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/otpInput';
 
 const page = () => {
   return (
@@ -14,12 +10,10 @@ const page = () => {
         Verify Phone Number
       </div>
       <p className="text-lg font-bold text-brand-dark mb-12">
-        We have sent an one time password on your phone number, fill it in below
-        and move to the next step.{' '}
+        We have sent an one time password on your phone number, fill it in below and move to the
+        next step.{' '}
       </p>
-      <p className="text-lg font-bold text-brand-dark mb-4">
-        One Time Password
-      </p>
+      <p className="text-lg font-bold text-brand-dark mb-4">One Time Password</p>
       <InputOTP
         containerClassName="w-full mb-12"
         maxLength={6}

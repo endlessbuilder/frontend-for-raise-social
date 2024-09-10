@@ -5,7 +5,7 @@ module.exports = {
   content: [
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
@@ -16,14 +16,14 @@ module.exports = {
           dark: '#25282B',
           'pale-lemon': '#FEFFDB',
           'olive-green': '#3D4630',
-          ivory: '#FDFDF0',
-        },
+          ivory: '#FDFDF0'
+        }
       },
       fontFamily: {
         heading: ['var(--font-heading)'],
-        body: ['var(--font-body)'],
-      },
-    },
+        body: ['var(--font-body)']
+      }
+    }
   },
   darkMode: 'class',
   plugins: [
@@ -36,10 +36,10 @@ module.exports = {
         light: {
           layout: {},
           colors: {
-            foreground: '#25282B',
-          },
-        },
-      },
-    }),
-  ],
+            foreground: '#25282B'
+          }
+        }
+      }
+    })
+  ]
 };

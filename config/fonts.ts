@@ -5,20 +5,20 @@ export const fontHeading = localFont({
     {
       path: '../public/font/c1.otf',
       weight: '700',
-      style: 'bold',
+      style: 'bold'
     },
     {
       path: '../public/font/c2.otf',
       weight: '400',
-      style: 'regular',
+      style: 'regular'
     },
     {
       path: '../public/font/c3.otf',
       weight: '100',
-      style: 'light',
-    },
+      style: 'light'
+    }
   ],
-  variable: '--font-heading',
+  variable: '--font-heading'
 });
 
 export const fontBody = localFont({
@@ -26,23 +26,23 @@ export const fontBody = localFont({
     {
       path: '../public/font/HelveticaNeueBold.otf',
       weight: '700',
-      style: 'bold',
+      style: 'bold'
     },
     {
       path: '../public/font/HelveticaNeueMedium.otf',
       weight: '500',
-      style: 'medium',
+      style: 'medium'
     },
     {
       path: '../public/font/HelveticaNeueRoman.otf',
       weight: '400',
-      style: 'regular',
+      style: 'regular'
     },
     {
       path: '../public/font/HelveticaNeueLight.otf',
       weight: '100',
-      style: 'light',
-    },
+      style: 'light'
+    }
   ],
-  variable: '--font-body',
+  variable: '--font-body'
 });

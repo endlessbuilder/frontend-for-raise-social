@@ -1,23 +1,13 @@
 import React from 'react';
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from '@nextui-org/dropdown';
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@nextui-org/dropdown';
 import { Button } from '@nextui-org/button';
 
-export default function BrandDropdown({
-  data,
-  label,
-  icon,
-  onSelectionChange,
-}) {
+export default function BrandDropdown({ data, label, icon, onSelectionChange }) {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
 
   const selectedValue = React.useMemo(() => {
     const selectedLabels = Array.from(selectedKeys).map(
-      (key) => data.find((item) => item.key === key)?.label,
+      (key) => data.find((item) => item.key === key)?.label
     );
     return selectedLabels.join(', ');
   }, [selectedKeys, data]);
@@ -57,12 +47,7 @@ export default function BrandDropdown({
                 </svg>
               </button>
             ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 16 16"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
                 <path
                   fill="currentColor"
                   fillRule="non-zero"
@@ -79,7 +64,7 @@ export default function BrandDropdown({
         aria-label="Multiple selection example"
         variant="flat"
         classNames={{
-          base: 'max-h-[50vh] overflow-auto',
+          base: 'max-h-[50vh] overflow-auto'
         }}
         closeOnSelect={false}
         selectionMode="multiple"

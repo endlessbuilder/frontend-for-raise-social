@@ -4,9 +4,7 @@ const PlanUpgradeComponent = () => {
   return (
     <main className="font-bold bg-yellow-200 max-w-[500px] text-stone-700 p-9">
       <header className="flex justify-between items-start">
-        <h1 className="text-3xl tracking-widest uppercase">
-          Upgrade to Basic Plan
-        </h1>
+        <h1 className="text-3xl tracking-widest uppercase">Upgrade to Basic Plan</h1>
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/7f7c4954a87c9db5c5b1f18a652ea436ac4780676e585beae629026e59f5182e"
           alt="Close"
@@ -17,14 +15,11 @@ const PlanUpgradeComponent = () => {
       <section className="flex justify-between items-baseline mt-11 uppercase">
         <h2 className="text-6xl tracking-[2.56px]">BASIC</h2>
         <p className="text-7xl tracking-[2.84px]">
-          <span className="text-5xl">10.00</span>{' '}
-          <span className="text-xl">SOL</span>
+          <span className="text-5xl">10.00</span> <span className="text-xl">SOL</span>
         </p>
       </section>
 
-      <p className="mt-7 text-2xl">
-        These features are Included in the basic plan of Raise.
-      </p>
+      <p className="mt-7 text-2xl">These features are Included in the basic plan of Raise.</p>
 
       <ul className="mt-10 space-y-4">
         <FeatureItem text="Basic Analytics" />

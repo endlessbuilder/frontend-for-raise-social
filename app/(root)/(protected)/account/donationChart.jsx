@@ -8,7 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
+  ResponsiveContainer
 } from 'recharts';
 
 const data = [
@@ -23,7 +23,7 @@ const data = [
   { month: 'Sep', donateAmount: 1.1, receivedAmount: 1.1 },
   { month: 'Oct', donateAmount: 1.1, receivedAmount: 1.1 },
   { month: 'Nov', donateAmount: 1.5, receivedAmount: 2.1 },
-  { month: 'Dec', donateAmount: 1.5, receivedAmount: 2.1 },
+  { month: 'Dec', donateAmount: 1.5, receivedAmount: 2.1 }
 ];
 
 const DonationChart = () => {
@@ -41,7 +41,7 @@ const DonationChart = () => {
               top: 20,
               right: 30,
               left: 20,
-              bottom: 5,
+              bottom: 5
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />

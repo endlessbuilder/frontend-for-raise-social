@@ -13,9 +13,7 @@ const layout = ({ children }) => {
                 className="object-contain shrink-0 rounded-lg aspect-square w-[60px]"
                 alt="lazy"
               />
-              <div className="self-start mt-2.5 basis-auto max-md:text-4xl">
-                Raise.
-              </div>
+              <div className="self-start mt-2.5 basis-auto max-md:text-4xl">Raise.</div>
             </div>
             {children}
           </div>
@@ -30,9 +28,9 @@ const layout = ({ children }) => {
             />
             <div className="min-h-[450px] flex overflow-hidden relative flex-col px-11 pb-11 rounded-3xl max-md:px-5 max-md:max-w-full h-full justify-end">
               <div className="max-md:max-w-full">
-                Raise allows you to create online fundraising campaigns
-                effortlessly with the powerful Solona based backend system.
-                Verify your campaign and get started raising funds.
+                Raise allows you to create online fundraising campaigns effortlessly with the
+                powerful Solona based backend system. Verify your campaign and get started raising
+                funds.
               </div>
               <img
                 loading="lazy"

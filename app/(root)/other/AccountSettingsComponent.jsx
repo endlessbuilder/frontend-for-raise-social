@@ -25,10 +25,7 @@ const ProfileSection = () => (
     <ProfileDetail label="Name" value="Sudeesha Patnayak" />
     <ProfileDetail label="Email" value="mesudeesha@outlook.com" />
     <ProfileDetail label="Phone" value="+91-9837398489" />
-    <ProfileDetail
-      label="Address"
-      value="1A, 115 C-Scheme, Jaipur, Rajasthan (302016)"
-    />
+    <ProfileDetail label="Address" value="1A, 115 C-Scheme, Jaipur, Rajasthan (302016)" />
   </section>
 );
 

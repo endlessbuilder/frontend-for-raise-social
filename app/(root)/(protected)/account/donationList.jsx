@@ -11,15 +11,11 @@ const DonationListComponent = ({ compFor = 'home' }) => {
       </h1>
       {compFor === 'campaign' && (
         <>
-          <div className={`text-xl font-bold tracking-wider text-brand-dark`}>
-            Raised $ 232232
-          </div>
+          <div className={`text-xl font-bold tracking-wider text-brand-dark`}>Raised $ 232232</div>
           <div
             className={`flex overflow-hidden flex-col items-start mt-1.5 w-full border border-solid border-brand-dark`}
           >
-            <div
-              className={`flex max-w-full bg-brand-dark min-h-[10px] w-1/2`}
-            />
+            <div className={`flex max-w-full bg-brand-dark min-h-[10px] w-1/2`} />
           </div>
         </>
       )}
@@ -74,7 +70,7 @@ const FilterSection = ({ compFor }) => (
           data={[
             { key: 'all', label: 'All' },
             { key: 'top-donor', label: 'Top donor' },
-            { key: 'latest-donor', label: 'Latest donor' },
+            { key: 'latest-donor', label: 'Latest donor' }
           ]}
           icon={
             <svg
@@ -109,7 +105,7 @@ const FilterSection = ({ compFor }) => (
             { key: 'shark', label: 'Shark' },
             { key: 'whale', label: 'Whale' },
             { key: 'otter', label: 'Otter' },
-            { key: 'crocodile', label: 'Crocodile' },
+            { key: 'crocodile', label: 'Crocodile' }
           ]}
           icon={
             <svg
@@ -144,12 +140,7 @@ const FilterSection = ({ compFor }) => (
             stroke="#3D4630"
             strokeWidth="2"
           />
-          <path
-            d="M20 20L17 17"
-            stroke="#3D4630"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
+          <path d="M20 20L17 17" stroke="#3D4630" strokeWidth="2" strokeLinecap="round" />
         </svg>
       }
       size="lg"
@@ -157,32 +148,19 @@ const FilterSection = ({ compFor }) => (
       placeholder="Search"
       radius="full"
       classNames={{
-        inputWrapper: 'border-brand-olive-green',
+        inputWrapper: 'border-brand-olive-green'
       }}
     />
   </div>
 );
 
-const DonationItem = ({
-  name,
-  amount,
-  time,
-  transactionHash,
-  imageUrl,
-  expanded,
-}) => (
+const DonationItem = ({ name, amount, time, transactionHash, imageUrl, expanded }) => (
   <>
     <div className="flex justify-between items-start mt-8">
       <div className="flex items-start gap-3">
-        <img
-          src={imageUrl}
-          alt={imageUrl}
-          className="w-[50px] h-[50px] rounded-full"
-        />
+        <img src={imageUrl} alt={imageUrl} className="w-[50px] h-[50px] rounded-full" />
         <div>
-          <h2 className="text-3xl tracking-wider uppercase font-heading">
-            {name}
-          </h2>
+          <h2 className="text-3xl tracking-wider uppercase font-heading">{name}</h2>
           <div className="flex gap-3.5 text-base">
             <span>{amount}</span>
             <span className="opacity-60">{time}</span>

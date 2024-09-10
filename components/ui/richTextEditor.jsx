@@ -2,20 +2,12 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js';
 import 'draft-js/dist/Draft.css';
-import {
-  ChevronDown,
-  Bold,
-  Italic,
-  Link,
-  List,
-  ListOrdered,
-  Image,
-} from 'lucide-react';
+import { ChevronDown, Bold, Italic, Link, List, ListOrdered, Image } from 'lucide-react';
 
 const BLOCK_TYPES = [
   { label: 'Paragraph', style: 'paragraph' },
   { label: 'Heading 1', style: 'header-one' },
-  { label: 'Heading 2', style: 'header-two' },
+  { label: 'Heading 2', style: 'header-two' }
 ];
 
 const RichTextEditor = ({ placeholder }) => {
@@ -27,10 +19,7 @@ const RichTextEditor = ({ placeholder }) => {
     setEditorState(state);
     // Update current block type
     const selection = state.getSelection();
-    const blockType = state
-      .getCurrentContent()
-      .getBlockForKey(selection.getStartKey())
-      .getType();
+    const blockType = state.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
     setCurrentBlockType(blockType);
   };
 
@@ -43,7 +32,7 @@ const RichTextEditor = ({ placeholder }) => {
       }
       return 'not-handled';
     },
-    [editorState],
+    [editorState]
   );
 
   const onStyleClick = (style) => {
@@ -67,17 +56,11 @@ const RichTextEditor = ({ placeholder }) => {
     } else {
       const content = editorState.getCurrentContent();
       const contentWithEntity = content.createEntity('LINK', 'MUTABLE', {
-        url: link,
+        url: link
       });
-      const newEditorState = EditorState.push(
-        editorState,
-        contentWithEntity,
-        'create-entity',
-      );
+      const newEditorState = EditorState.push(editorState, contentWithEntity, 'create-entity');
       const entityKey = contentWithEntity.getLastCreatedEntityKey();
-      handleEditorChange(
-        RichUtils.toggleLink(newEditorState, selection, entityKey),
-      );
+      handleEditorChange(RichUtils.toggleLink(newEditorState, selection, entityKey));
     }
   };
 
@@ -91,18 +74,12 @@ const RichTextEditor = ({ placeholder }) => {
       reader.onload = (e) => {
         const src = e.target.result;
         const contentState = editorState.getCurrentContent();
-        const contentStateWithEntity = contentState.createEntity(
-          'IMAGE',
-          'IMMUTABLE',
-          { src },
-        );
+        const contentStateWithEntity = contentState.createEntity('IMAGE', 'IMMUTABLE', { src });
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
         const newEditorState = EditorState.set(editorState, {
-          currentContent: contentStateWithEntity,
+          currentContent: contentStateWithEntity
         });
-        handleEditorChange(
-          AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '),
-        );
+        handleEditorChange(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
       };
       reader.readAsDataURL(file);
     };
@@ -113,7 +90,7 @@ const RichTextEditor = ({ placeholder }) => {
     if (contentBlock.getType() === 'atomic') {
       return {
         component: Media,
-        editable: false,
+        editable: false
       };
     }
   };
@@ -124,9 +101,7 @@ const RichTextEditor = ({ placeholder }) => {
     const type = entity.getType();
 
     if (type === 'IMAGE') {
-      return (
-        <img src={src} alt="Uploaded content" className="max-w-full h-auto" />
-      );
+      return <img src={src} alt="Uploaded content" className="max-w-full h-auto" />;
     }
   };
 
@@ -145,16 +120,10 @@ const RichTextEditor = ({ placeholder }) => {
           ))}
         </select>
         <ChevronDown className="w-4 h-4 text-gray-500 mr-2" />
-        <button
-          onClick={() => onStyleClick('BOLD')}
-          className="p-1 rounded hover:bg-gray-100"
-        >
+        <button onClick={() => onStyleClick('BOLD')} className="p-1 rounded hover:bg-gray-100">
           <Bold className="w-4 h-4" />
         </button>
-        <button
-          onClick={() => onStyleClick('ITALIC')}
-          className="p-1 rounded hover:bg-gray-100"
-        >
+        <button onClick={() => onStyleClick('ITALIC')} className="p-1 rounded hover:bg-gray-100">
           <Italic className="w-4 h-4" />
         </button>
         <button onClick={onLinkClick} className="p-1 rounded hover:bg-gray-100">
@@ -172,10 +141,7 @@ const RichTextEditor = ({ placeholder }) => {
         >
           <ListOrdered className="w-4 h-4" />
         </button>
-        <button
-          onClick={onImageClick}
-          className="p-1 rounded hover:bg-gray-100"
-        >
+        <button onClick={onImageClick} className="p-1 rounded hover:bg-gray-100">
           <Image className="w-4 h-4" alt="list" />
         </button>
       </div>

@@ -18,7 +18,7 @@ const Campaigns = () => {
   const [filters, setFilters] = useState({
     category: new Set([]),
     location: new Set([]),
-    closeToGoal: new Set([]),
+    closeToGoal: new Set([])
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,7 +30,7 @@ const Campaigns = () => {
         const [categoriesRes, locationsRes, campaignsRes] = await Promise.all([
           axios.get(`${SERVER_IP}/api/category`),
           axios.get(`${SERVER_IP}/api/location`),
-          axios.get(`${SERVER_IP}/api/campaign`),
+          axios.get(`${SERVER_IP}/api/campaign`)
         ]);
 
         setCategories(categoriesRes.data.category);
@@ -59,13 +59,10 @@ const Campaigns = () => {
   const filteredCampaigns = useMemo(() => {
     return campaigns.filter((campaign) => {
       const matchesCategory =
-        filters.category.size === 0 ||
-        filters.category.has(campaign.categoryId);
+        filters.category.size === 0 || filters.category.has(campaign.categoryId);
       const matchesLocation =
         filters.location.size === 0 || filters.location.has(campaign.countryId);
-      const matchesSearch = campaign.title
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+      const matchesSearch = campaign.title.toLowerCase().includes(searchTerm.toLowerCase());
       return matchesCategory && matchesLocation && matchesSearch;
     });
   }, [filters, searchTerm, campaigns]);
@@ -177,7 +174,7 @@ const Campaigns = () => {
             data={[
               { key: '90', label: '90% or more' },
               { key: '75', label: '75% or more' },
-              { key: '50', label: '50% or more' },
+              { key: '50', label: '50% or more' }
             ]}
             icon={
               <svg
@@ -195,9 +192,7 @@ const Campaigns = () => {
                 />
               </svg>
             }
-            onSelectionChange={(keys) =>
-              handleFilterChange('closeToGoal', keys)
-            }
+            onSelectionChange={(keys) => handleFilterChange('closeToGoal', keys)}
           />
         </div>
         <Input
@@ -214,12 +209,7 @@ const Campaigns = () => {
                 stroke="#3D4630"
                 strokeWidth="2"
               />
-              <path
-                d="M20 20L17 17"
-                stroke="#3D4630"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
+              <path d="M20 20L17 17" stroke="#3D4630" strokeWidth="2" strokeLinecap="round" />
             </svg>
           }
           size="lg"
@@ -227,7 +217,7 @@ const Campaigns = () => {
           placeholder="Search"
           radius="full"
           classNames={{
-            inputWrapper: 'border-brand-olive-green',
+            inputWrapper: 'border-brand-olive-green'
           }}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -254,7 +244,7 @@ const Campaigns = () => {
           size="lg"
           classNames={{
             item: '!rounded-none border border-brand-olive-green bg-transparent hover:!bg-transparent',
-            cursor: '!rounded-none bg-brand-olive-green',
+            cursor: '!rounded-none bg-brand-olive-green'
           }}
         />
       </div>

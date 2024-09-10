@@ -7,7 +7,7 @@ import {
   PublicKey,
   Transaction,
   SystemProgram,
-  LAMPORTS_PER_SOL,
+  LAMPORTS_PER_SOL
 } from '@solana/web3.js';
 import { Button } from '@nextui-org/button';
 import { TESTNET } from '../../../../utils/constants';
@@ -97,17 +97,15 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
     if (!wallet || !amount) return;
 
     const donationAmount = parseFloat(amount) * LAMPORTS_PER_SOL;
-    const recipient = new PublicKey(
-      '3JKwidu2bmNhBcJs62TxHHaaFn98rdtNGcprRSd7pEMT',
-    ); // Replace with actual recipient address
+    const recipient = new PublicKey('3JKwidu2bmNhBcJs62TxHHaaFn98rdtNGcprRSd7pEMT'); // Replace with actual recipient address
 
     try {
       const transaction = new Transaction().add(
         SystemProgram.transfer({
           fromPubkey: new PublicKey(wallet),
           toPubkey: recipient,
-          lamports: donationAmount,
-        }),
+          lamports: donationAmount
+        })
       );
 
       const { blockhash } = await connection.getLatestBlockhash();
@@ -161,13 +159,11 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
             </p>
           </div>
           <p className="text-base font-bold tracking-wider text-olive-green mb-6">
-            Thanks you Mr. Donor for helping our camp in saving rare species of
-            tigers.
+            Thanks you Mr. Donor for helping our camp in saving rare species of tigers.
             <br />
             Transaction Hash- 34jkl.............4343
             <br />
-            We guarantee you a full refund for up to a year in the rare case
-            that fraud occurs.
+            We guarantee you a full refund for up to a year in the rare case that fraud occurs.
           </p>
           <Textarea
             variant="bordered"
@@ -175,7 +171,7 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
             radius="sm"
             className="mb-5"
             classNames={{
-              inputWrapper: 'border border-brand-olive-green',
+              inputWrapper: 'border border-brand-olive-green'
             }}
           />
           <div className="flex justify-end">
@@ -201,8 +197,7 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
           />
           <footer className="mt-6">
             <p className="text-base font-bold tracking-wider text-olive-green">
-              We guarantee you a full refund for up to a year in the rare case
-              that fraud occurs.
+              We guarantee you a full refund for up to a year in the rare case that fraud occurs.
             </p>
           </footer>
         </>
@@ -213,14 +208,7 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
 
 // ... (CampaignImage and CampaignDetails components remain unchanged)
 
-const DonationForm = ({
-  wallet,
-  balance,
-  amount,
-  setAmount,
-  onConnectWallet,
-  onDonate,
-}) => (
+const DonationForm = ({ wallet, balance, amount, setAmount, onConnectWallet, onDonate }) => (
   <form>
     <div className="mb-4">
       <button
@@ -228,9 +216,7 @@ const DonationForm = ({
         onClick={onConnectWallet}
         className="w-full p-4 flex justify-between items-center rounded-lg border border-olive-green text-xl font-bold text-olive-green"
       >
-        {wallet
-          ? `Connected: ${wallet.slice(0, 4)}...${wallet.slice(-4)}`
-          : 'Connect Wallet'}
+        {wallet ? `Connected: ${wallet.slice(0, 4)}...${wallet.slice(-4)}` : 'Connect Wallet'}
         <svg
           width="32"
           height="32"
@@ -269,11 +255,9 @@ const DonationForm = ({
         classNames={{
           inputWrapper:
             'border border-brand-dark hover:border-brand-dark data-[hover=true]:border-brand-dark',
-          label: 'font-bold text-xl',
+          label: 'font-bold text-xl'
         }}
-        endContent={
-          <p className="text-brand-olive-green font-bold mb-1 text-2xl">SOL</p>
-        }
+        endContent={<p className="text-brand-olive-green font-bold mb-1 text-2xl">SOL</p>}
       />
     </div>
     <ConsentCheckboxes />
@@ -315,14 +299,11 @@ const ConsentCheckboxes = () => (
   <fieldset className="mb-4">
     <legend className="sr-only">Consent Options</legend>
     <div className="flex items-center mb-2">
-      <Checkbox>
-        Don&apos;t display my name publicly on the fundraiser.
-      </Checkbox>
+      <Checkbox>Don&apos;t display my name publicly on the fundraiser.</Checkbox>
     </div>
     <div className="flex items-center">
       <Checkbox>
-        Get occasional marketing updates from Raise. You may unsubscribe at any
-        time.
+        Get occasional marketing updates from Raise. You may unsubscribe at any time.
       </Checkbox>
     </div>
   </fieldset>

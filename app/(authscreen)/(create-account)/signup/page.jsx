@@ -17,7 +17,7 @@ const page = () => {
         radius="sm"
         className="mb-5"
         classNames={{
-          inputWrapper: 'border border-brand-dark',
+          inputWrapper: 'border border-brand-dark'
         }}
       />
       <Input
@@ -28,7 +28,7 @@ const page = () => {
         radius="sm"
         className="mb-5"
         classNames={{
-          inputWrapper: 'border border-brand-dark',
+          inputWrapper: 'border border-brand-dark'
         }}
       />
       <Input
@@ -39,7 +39,7 @@ const page = () => {
         radius="sm"
         className="mb-10"
         classNames={{
-          inputWrapper: 'border border-brand-dark',
+          inputWrapper: 'border border-brand-dark'
         }}
       />
       <Button

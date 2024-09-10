@@ -5,12 +5,7 @@ const Footer = () => {
   return (
     <div className="flex overflow-hidden flex-col px-16 pt-20 pb-14 bg-brand-olive-green max-md:px-5 font-heading">
       <div className="flex gap-3 self-start text-5xl font-bold text-amber-50 whitespace-nowrap max-md:text-4xl">
-        <Image
-          width={45}
-          height={45}
-          src="/images/logo.png"
-          alt="footter-logo"
-        />
+        <Image width={45} height={45} src="/images/logo.png" alt="footter-logo" />
         <p className="font-bold text-inherit text-white text-4xl mt-2">Raise</p>
       </div>
       <div className="flex flex-wrap gap-5 justify-between mt-8 font-bold text-amber-50 uppercase max-md:mr-1 max-md:max-w-full">
