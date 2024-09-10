@@ -1,4 +1,10 @@
-const { Program, BN, AnchorProvider, Wallet, Idl } = require('@coral-xyz/anchor');
+const {
+  Program,
+  BN,
+  AnchorProvider,
+  Wallet,
+  Idl,
+} = require('@coral-xyz/anchor');
 const {
   PublicKey,
   Keypair,
@@ -6,7 +12,7 @@ const {
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   SYSVAR_INSTRUCTIONS_PUBKEY,
-  Transaction
+  Transaction,
 } = require('@solana/web3.js');
 const { TOKEN_PROGRAM_ID } = require('@solana/spl-token');
 
@@ -16,7 +22,7 @@ exports.defaultProgramAccounts = {
   systemProgram: SystemProgram.programId,
   tokenProgram: TOKEN_PROGRAM_ID,
   rent: SYSVAR_RENT_PUBKEY,
-  instruction: SYSVAR_INSTRUCTIONS_PUBKEY
+  instruction: SYSVAR_INSTRUCTIONS_PUBKEY,
 };
 
 class RaiseContractImpl {
@@ -31,25 +37,21 @@ class RaiseContractImpl {
     const provider = new AnchorProvider(
       connection,
       new Wallet(Keypair.generate()),
-      { commitment: 'processed' }
+      { commitment: 'processed' },
     );
-    const program = new Program(
-      idl,
-      idl.metadata.address,
-      provider
-    );
+    const program = new Program(idl, idl.metadata.address, provider);
 
     return new RaiseContractImpl(program, connection);
   }
 
   setWallet(wallet) {
     const provider = new AnchorProvider(this.connection, wallet, {
-      commitment: 'processed'
+      commitment: 'processed',
     });
     this.program = new Program(
       this.program.idl,
       this.program.programId,
-      provider
+      provider,
     );
   }
 
@@ -82,7 +84,7 @@ class RaiseContractImpl {
     return this.getPda([
       Buffer.from('donor'),
       campaignPubkey.toBuffer(),
-      userPubkey.toBuffer()
+      userPubkey.toBuffer(),
     ]);
   }
 
@@ -93,7 +95,7 @@ class RaiseContractImpl {
     if (tokenAccounts.length > 0) {
       let maxAmount = 0;
       let tokenAccount = tokenAccounts[0].pubkey;
-      tokenAccounts.forEach(val => {
+      tokenAccounts.forEach((val) => {
         let amount = val.account.data.parsed.uiAmount;
         if (amount > maxAmount) {
           tokenAccount = val.pubkey;
@@ -109,16 +111,16 @@ class RaiseContractImpl {
     let platform = this.getPlatform();
     let platformAuthority = this.getPlatformAuthority();
 
-    console.log(">>> connection : ", this.connection._rpcEndpoint)
-    console.log(">>> program Id : ", this.program.programId.toBase58())
-    console.log(">>> platform : ", platform.toBase58())
-    console.log(">>> platformAuthority : ", platformAuthority.toBase58())
+    console.log('>>> connection : ', this.connection._rpcEndpoint);
+    console.log('>>> program Id : ', this.program.programId.toBase58());
+    console.log('>>> platform : ', platform.toBase58());
+    console.log('>>> platformAuthority : ', platformAuthority.toBase58());
 
     let accounts = {
       admin: admin,
       platform: platform,
       platformAuthority: platformAuthority,
-      ...defaultProgramAccounts
+      ...defaultProgramAccounts,
     };
 
     let params = { fee: fee };
@@ -132,7 +134,7 @@ class RaiseContractImpl {
     await this.connection.confirmTransaction({
       signature: txId,
       blockhash: latestBlockhash.blockhash,
-      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight
+      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
     });
 
     return { success: true, msg: null, txId };
@@ -146,7 +148,7 @@ class RaiseContractImpl {
       admin,
       platform,
       platformAuthority,
-      ...defaultProgramAccounts
+      ...defaultProgramAccounts,
     };
 
     let params = { adminToBeChanged };
@@ -160,7 +162,7 @@ class RaiseContractImpl {
     await this.connection.confirmTransaction({
       signature: txId,
       blockhash: latestBlockhash.blockhash,
-      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight
+      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
     });
 
     return { success: true, msg: null, txId };
@@ -174,7 +176,7 @@ class RaiseContractImpl {
       admin,
       platform,
       platformAuthority,
-      ...defaultProgramAccounts
+      ...defaultProgramAccounts,
     };
 
     let params = { feeToBeChanged };
@@ -188,7 +190,7 @@ class RaiseContractImpl {
     await this.connection.confirmTransaction({
       signature: txId,
       blockhash: latestBlockhash.blockhash,
-      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight
+      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
     });
 
     return { success: true, msg: null, txId };
@@ -204,7 +206,7 @@ class RaiseContractImpl {
       creator: creator.publicKey,
       campaign,
       campaignAuthority,
-      ...defaultProgramAccounts
+      ...defaultProgramAccounts,
     };
 
     let params = { goal, campaignDuration, minDepositAmount };
@@ -220,7 +222,7 @@ class RaiseContractImpl {
     await this.connection.confirmTransaction({
       signature: txId,
       blockhash: latestBlockhash.blockhash,
-      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight
+      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
     });
 
     return { success: true, msg: null, txId };
@@ -239,7 +241,7 @@ class RaiseContractImpl {
       campaign,
       campaignAuthority,
       donorInfo,
-      ...defaultProgramAccounts
+      ...defaultProgramAccounts,
     };
 
     let params = { fundAmount };
@@ -254,7 +256,7 @@ class RaiseContractImpl {
     await this.connection.confirmTransaction({
       signature: txId,
       blockhash: latestBlockhash.blockhash,
-      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight
+      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
     });
 
     return { success: true, msg: null, txId };
@@ -268,7 +270,7 @@ class RaiseContractImpl {
       creator: creator.publicKey,
       campaign,
       campaignAuthority,
-      ...defaultProgramAccounts
+      ...defaultProgramAccounts,
     };
 
     let txId = await this.program.methods
@@ -281,7 +283,7 @@ class RaiseContractImpl {
     await this.connection.confirmTransaction({
       signature: txId,
       blockhash: latestBlockhash.blockhash,
-      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight
+      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
     });
 
     return { success: true, msg: null, txId };
@@ -298,7 +300,7 @@ class RaiseContractImpl {
       campaign,
       campaignAuthority,
       donorInfo,
-      ...defaultProgramAccounts
+      ...defaultProgramAccounts,
     };
 
     let txId = await this.program.methods
@@ -310,7 +312,7 @@ class RaiseContractImpl {
     await this.connection.confirmTransaction({
       signature: txId,
       blockhash: latestBlockhash.blockhash,
-      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight
+      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
     });
 
     return { success: true, msg: null, txId };
@@ -323,7 +325,7 @@ class RaiseContractImpl {
     let accounts = {
       creator,
       campaign,
-      ...defaultProgramAccounts
+      ...defaultProgramAccounts,
     };
 
     let txId = await this.program.methods
@@ -335,7 +337,7 @@ class RaiseContractImpl {
     await this.connection.confirmTransaction({
       signature: txId,
       blockhash: latestBlockhash.blockhash,
-      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight
+      lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
     });
 
     return { success: true, msg: null, txId };

@@ -1,18 +1,12 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { NextUIProvider } from "@nextui-org/system";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import * as React from 'react';
+import { NextUIProvider } from '@nextui-org/system';
 
 export interface ProvidersProps {
   children: React.ReactNode;
 }
 
 export function Providers({ children }: ProvidersProps) {
-
-  return (
-    <NextUIProvider>
-      {children}
-    </NextUIProvider>
-  );
+  return <NextUIProvider>{children}</NextUIProvider>;
 }

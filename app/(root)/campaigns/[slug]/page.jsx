@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import CampaignDetailsComponent from "./campaignDetailsComponent";
-import axios from "axios";
-import { SERVER_IP } from "../../../../utils/constants";
+import React, { useState, useEffect } from 'react';
+import CampaignDetailsComponent from './campaignDetailsComponent';
+import axios from 'axios';
+import { SERVER_IP } from '../../../../utils/constants';
 
 const Page = ({ params }) => {
   // State to store a single campaign (not an array)
@@ -17,13 +17,13 @@ const Page = ({ params }) => {
     const fetchData = async () => {
       try {
         const campaignsRes = await axios.get(
-          `${SERVER_IP}/api/campaign/${params.slug}`
+          `${SERVER_IP}/api/campaign/${params.slug}`,
         );
         setCampaignData(campaignsRes.data.data); // Assuming the response has "data"
-        console.log("Fetched Campaign:", campaignsRes.data.data);
+        console.log('Fetched Campaign:', campaignsRes.data.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
-        setError("Failed to fetch campaign data");
+        console.error('Error fetching data:', error);
+        setError('Failed to fetch campaign data');
       } finally {
         setLoading(false); // Whether success or failure, loading stops
       }
@@ -44,7 +44,7 @@ const Page = ({ params }) => {
     return <div>No campaign found</div>; // Handle case when no campaign data is found
   }
 
-  return <CampaignDetailsComponent campaignData={campaignData[0]} />
+  return <CampaignDetailsComponent campaignData={campaignData[0]} />;
 };
 
 export default Page;

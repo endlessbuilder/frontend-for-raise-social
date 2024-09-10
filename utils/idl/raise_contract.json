@@ -217,9 +217,7 @@
           "name": "donor",
           "isMut": true,
           "isSigner": false,
-          "docs": [
-            "CHECK"
-          ]
+          "docs": ["CHECK"]
         },
         {
           "name": "creator",

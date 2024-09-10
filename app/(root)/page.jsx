@@ -1,55 +1,50 @@
-"use client";
+'use client';
 
-import React from "react";
-import HeroSection from "./hero";
-import FundraisersSection from "./fundraisersSection";
-import FAQComponent from "./faq";
-import { Button } from "@nextui-org/button";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { SERVER_IP } from "../../utils/constants";
+import React from 'react';
+import HeroSection from './hero';
+import FundraisersSection from './fundraisersSection';
+import FAQComponent from './faq';
+import { Button } from '@nextui-org/button';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { SERVER_IP } from '../../utils/constants';
 
-const page = () => {
+const Page = () => {
   const [campaigns, setCampaigns] = useState([]);
   const fetchData = async () => {
     try {
-      const campaignsRes = await axios.get(`${SERVER_IP}/api/campaign`)
+      const campaignsRes = await axios.get(`${SERVER_IP}/api/campaign`);
       // const campaignsRes = await Promise(
       //   axios.get(`${}/api/campaign`),
       // );
       setCampaigns(campaignsRes.data.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.log('Error fetching data:', error);
     }
   };
   console.log(campaigns);
 
-  const createPlatform = async () => {
-    try {
-      const response = await axios.post(
-        `${SERVER_IP}/api/platform/create`
-      );
+  // const createPlatform = async () => {
+  //   try {
+  //     const response = await axios.post(`${SERVER_IP}/api/platform/create`);
 
-      console.log("Platform created successfully", response);
-    } catch {
-      console.error("Error creating platform:", error);
-    }
+  //     console.log('Platform created successfully', response);
+  //   } catch (error) {
+  //     console.log('Error creating platform:', error);
+  //   }
+  // };
+  // const setPlatformFee = async () => {
+  //   try {
+  //     const response = await axios.post(`${SERVER_IP}/api/platform/setFee`, {
+  //       feeToBeChanged: 0.02,
+  //     });
 
-  };
-  const setPlatformFee = async () => {
-    try {
-      const response = await axios.post(
-        `${SERVER_IP}/api/platform/setFee`,
-        { feeToBeChanged: 0.02 }
-      );
-
-      console.log("Platform fee set successfully", response);
-    } catch {
-      console.error("Error platform fee set: ", error);
-    }
-
-  };
+  //     console.log('Platform fee set successfully', response);
+  //   } catch (error) {
+  //     console.log('Error platform fee set: ', error);
+  //   }
+  // };
 
   useEffect(() => {
     fetchData();
@@ -72,7 +67,8 @@ const page = () => {
                 variant="bordered"
                 radius="full"
                 size="lg"
-                className="font-medium text-brand-ivory border-brand-ivory xl:py-6 xl:px-7">
+                className="font-medium text-brand-ivory border-brand-ivory xl:py-6 xl:px-7"
+              >
                 Browse Campaigns
               </Button>
             </Link>
@@ -81,7 +77,8 @@ const page = () => {
                 variant="bordered"
                 radius="full"
                 size="lg"
-                className="font-medium text-brand-ivory border-brand-ivory xl:py-6 xl:px-7">
+                className="font-medium text-brand-ivory border-brand-ivory xl:py-6 xl:px-7"
+              >
                 Start a Campaign
               </Button>
             </Link>
@@ -163,4 +160,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

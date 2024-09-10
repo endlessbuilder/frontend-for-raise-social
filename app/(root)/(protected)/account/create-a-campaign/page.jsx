@@ -1,25 +1,20 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import axios from "axios"; // Ensure axios is imported
-import RichTextEditor from "@/components/ui/richTextEditor";
-import DragDropUpload from "@/components/ui/dragDropUpload";
-import { Input } from "@nextui-org/input";
-import { Autocomplete, AutocompleteItem } from "@nextui-org/autocomplete";
-import { Button } from "@nextui-org/button";
-import { SERVER_IP } from "../../../../../utils/constants";
-import { FSERVER_IP } from "../../../../../utils/constants";
-import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL, Keypair } from '@solana/web3.js';
-const { Program, AnchorProvider, Wallet } = require('@coral-xyz/anchor');
+'use client';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Ensure axios is imported
+import RichTextEditor from '@/components/ui/richTextEditor';
+import DragDropUpload from '@/components/ui/dragDropUpload';
+import { Input } from '@nextui-org/input';
+import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
+import { Button } from '@nextui-org/button';
+import { SERVER_IP } from '../../../../../utils/constants';
+import { FSERVER_IP } from '../../../../../utils/constants';
+require('@coral-xyz/anchor');
 
-const RaiseContractImpl = require('../../../../../utils/integration');
-import { TESTNET } from "../../../../../utils/constants";
-const bs58 = require('@coral-xyz/anchor/dist/cjs/utils/bytes/bs58');
-const { BN } = require('@coral-xyz/anchor')
+import { TESTNET } from '../../../../../utils/constants';
+require('@coral-xyz/anchor');
 
-const idl = require("../../../../../utils/idl/raise_contract.json");
-
-console.log(">>> connected to ", TESTNET);
-const connection = new Connection(TESTNET);
+console.log('>>> connected to ', TESTNET);
+// const connection = new Connection(TESTNET);
 
 const Page = () => {
   const [categories, setCategories] = useState([]);
@@ -32,19 +27,19 @@ const Page = () => {
   const [amount, setAmount] = useState();
   const [campaignImage, setCampaignImage] = useState();
   const [proofDocuments, setProofDocuments] = useState([]);
-  const [campaignTitle, setCampaignTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [campaignImageIds, setCampaignImageId] = useState();
+  const [campaignTitle, setCampaignTitle] = useState('');
+  const [description, setDescription] = useState('');
+  // const [campaignImageIds, setCampaignImageId] = useState();
   const [proofDocumentIds, setProofDocumentIds] = useState([]);
 
   const [wallet, setWallet] = useState(null);
-  const [balance, setBalance] = useState(null);
+  // const [balance, setBalance] = useState(null);
 
-  const userID = localStorage.getItem("userID");
+  const userID = localStorage.getItem('userID');
+
+  setDescription('');
 
   useEffect(() => {
-    const userID = localStorage.getItem("userID");
-
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -57,15 +52,13 @@ const Page = () => {
         setLocations(locationsRes.data.country || []);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
         setError(error);
         setLoading(false);
       }
     };
     fetchData();
-
   }, []);
-
 
   // Helper function to extract plain text from HTML
   const getInnerText = (html) => {
@@ -76,34 +69,23 @@ const Page = () => {
 
   const handleConnectWallet = async () => {
     if (!wallet) {
-      if ("solana" in window) {
+      if ('solana' in window) {
         const provider = window.solana;
         if (provider.isPhantom) {
           await provider.disconnect();
           try {
             const response = await provider.connect();
             setWallet(response.publicKey.toString());
-            console.log(">>> wallet in create campaign : ", wallet);
-            await updateBalance(response.publicKey);
+            console.log('>>> wallet in create campaign : ', wallet);
           } catch (error) {
-            console.error("Error connecting to Phantom wallet:", error);
+            console.error('Error connecting to Phantom wallet:', error);
           }
         }
       } else {
-        window.open("https://phantom.app/", "_blank");
+        window.open('https://phantom.app/', '_blank');
       }
     }
   };
-
-  const updateBalance = async (publicKey) => {
-    try {
-      const balance = await connection.getBalance(new PublicKey(publicKey));
-      setBalance(balance / LAMPORTS_PER_SOL);
-    } catch (error) {
-      console.error("Error fetching balance:", error);
-    }
-  };
-
 
   // const validateInputs = () => {
   //   if (
@@ -120,18 +102,18 @@ const Page = () => {
   //   return true;
   // };
 
-  const onHandleContent = e => {
+  const onHandleContent = (e) => {
     console.log(e.target.value);
-  }
+  };
 
   const uploadFile = async (files) => {
     const formData = new FormData();
 
     // If multiple files, append them
     if (Array.isArray(files)) {
-      files.forEach((file, index) => formData.append("file_" + index, file));
+      files.forEach((file, index) => formData.append('file_' + index, file));
     } else {
-      formData.append("files", files); // Single file
+      formData.append('files', files); // Single file
     }
 
     try {
@@ -140,14 +122,14 @@ const Page = () => {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         },
       );
 
       // Ensure the response contains the uploaded file information
       const uploadedFiles = response.data.uploaded;
-      console.log("Uploaded Files:", uploadedFiles);
+      console.log('Uploaded Files:', uploadedFiles);
 
       if (uploadedFiles != undefined) {
         // Map the file IDs
@@ -155,13 +137,13 @@ const Page = () => {
         return fileIds;
       }
     } catch (error) {
-      console.error("Error uploading files:", error);
+      console.error('Error uploading files:', error);
       throw error;
     }
   };
-
-  const campaignImgReader = new FileReader();
-  campaignImgReader.onloadend = function() {
+  const campaignImgReader =
+    typeof window !== 'undefined' ? new FileReader() : null;
+  campaignImgReader.onloadend = function () {
     // const base64String = campaignImgReader.result.split(', ')[1]; // Remove data:image/...;base64, part
     // console.log(campaignImgReader.result);
     setCamImgFile(campaignImgReader.result);
@@ -172,26 +154,26 @@ const Page = () => {
   //   console.log(proofDocumentReader.result);
   // };
 
-  const handleCamImg = img => {
+  const handleCamImg = (img) => {
     setCampaignImage(img);
     console.log(img);
-    if(img!=undefined){
+    if (img != undefined) {
       campaignImgReader.readAsDataURL(img);
     }
-  }
+  };
 
   const handleSubmit = async () => {
-    console.log(">>> clicked Send For KYC ");
+    console.log('>>> clicked Send For KYC ');
     await handleConnectWallet();
     try {
       // Upload campaign image
       // if (campaignImage != undefined) {
       //   const campaignImageIds = await uploadFile(campaignImage);
-      //   setCampaignImageId(campaignImageIds[0]); // Assuming there's only one campaign 
+      //   setCampaignImageId(campaignImageIds[0]); // Assuming there's only one campaign
       //   console.log(campaignImageIds);
       // }
 
-      if(campaignImage == undefined){
+      if (campaignImage == undefined) {
         setCamImgFile(null);
       }
 
@@ -203,7 +185,7 @@ const Page = () => {
         const proofDocumentIds = await uploadFile(proofDocuments);
         setProofDocumentIds(proofDocumentIds);
 
-        console.log("Proof Document IDs:", proofDocumentIds);
+        console.log('Proof Document IDs:', proofDocumentIds);
       }
       // if (!validateInputs()) {
       //   alert("All fields must be filled!");
@@ -215,7 +197,7 @@ const Page = () => {
       // }
       // proofDocumentReader.readAsDataURL(proofDocuments)
 
-      console.log("ddesr",description)
+      console.log('ddesr', description);
 
       const formData = {
         title: campaignTitle,
@@ -227,17 +209,17 @@ const Page = () => {
         kyc: proofDocumentIds,
         text: getInnerText(description),
         createrId: userID,
-        totalAmount: "0",
+        totalAmount: '0',
       };
 
-      console.log(formData)
+      console.log(formData);
 
       // Send form data to the server
       const response = await axios.post(
         `${SERVER_IP}/api/campaign/create`,
         formData,
       );
-      console.log("Campaign created successfully:", response.data);
+      console.log('Campaign created successfully:', response.data);
 
       // if (!wallet || !amount) await handleConnectWallet();
       // console.log(">>> wallet publickey : ", wallet);
@@ -276,42 +258,41 @@ const Page = () => {
       //   alert("Creating campaign failed. Please try again.");
       // }
 
-    //   console.log(">>> connected to ", connection);
-    //   console.log(">>> wallet to ", wallet);
-    //   await handleConnectWallet();
-    //   if (!wallet) return;
-    //   await updateBalance(wallet, connection); // Use state connection
+      //   console.log(">>> connected to ", connection);
+      //   console.log(">>> wallet to ", wallet);
+      //   await handleConnectWallet();
+      //   if (!wallet) return;
+      //   await updateBalance(wallet, connection); // Use state connection
 
-    //   const fee = parseFloat(0.0001) * LAMPORTS_PER_SOL;
-    //   const recipient = new PublicKey("3JKwidu2bmNhBcJs62TxHHaaFn98rdtNGcprRSd7pEMT"); // Replace with actual recipient address
+      //   const fee = parseFloat(0.0001) * LAMPORTS_PER_SOL;
+      //   const recipient = new PublicKey("3JKwidu2bmNhBcJs62TxHHaaFn98rdtNGcprRSd7pEMT"); // Replace with actual recipient address
 
-    //   try {
-    //     const transaction = new Transaction().add(
-    //       SystemProgram.transfer({
-    //         fromPubkey: new PublicKey(wallet),
-    //         toPubkey: recipient,
-    //         lamports: fee,
-    //       })
-    //     );
+      //   try {
+      //     const transaction = new Transaction().add(
+      //       SystemProgram.transfer({
+      //         fromPubkey: new PublicKey(wallet),
+      //         toPubkey: recipient,
+      //         lamports: fee,
+      //       })
+      //     );
 
-    //     const { blockhash } = await connection.getLatestBlockhash();
-    //     transaction.recentBlockhash = blockhash;
-    //     transaction.feePayer = new PublicKey(wallet);
+      //     const { blockhash } = await connection.getLatestBlockhash();
+      //     transaction.recentBlockhash = blockhash;
+      //     transaction.feePayer = new PublicKey(wallet);
 
-    //     console.log(">>> transaction : ", transaction)
+      //     console.log(">>> transaction : ", transaction)
 
-    //     const signed = await window.solana.signTransaction(transaction);
-    //     const signature = await connection.sendRawTransaction(signed.serialize());
-    //     await connection.confirmTransaction(signature);
+      //     const signed = await window.solana.signTransaction(transaction);
+      //     const signature = await connection.sendRawTransaction(signed.serialize());
+      //     await connection.confirmTransaction(signature);
 
-    //     alert("Creating campagin successful!");
-    //   } catch (error) {
-    //     console.error("Error creating campaign:", error);
-    //     alert("creating camgaign failed. Please try again.");
-    //   }
-
+      //     alert("Creating campagin successful!");
+      //   } catch (error) {
+      //     console.error("Error creating campaign:", error);
+      //     alert("creating camgaign failed. Please try again.");
+      //   }
     } catch (error) {
-      console.error("Submission failed:", error);
+      console.error('Submission failed:', error);
     }
   };
 
@@ -342,7 +323,8 @@ const Page = () => {
             radius="sm"
             onSelectionChange={(key) => {
               setLocation(key);
-            }}>
+            }}
+          >
             {locations.map((item) => (
               <AutocompleteItem key={item._id} value={item.name}>
                 {item.name}
@@ -355,7 +337,8 @@ const Page = () => {
             radius="sm"
             onSelectionChange={(key) => {
               setCategory(key);
-            }}>
+            }}
+          >
             {categories.map((item) => (
               <AutocompleteItem key={item._id} value={item.name}>
                 {item.name}
@@ -373,7 +356,7 @@ const Page = () => {
           />
           <DragDropUpload
             acceptedFormats={{
-              "image/*": [".jpeg", ".png", ".jpg", ".gif"],
+              'image/*': ['.jpeg', '.png', '.jpg', '.gif'],
             }}
             isMultiple={false}
             label="Campaign Image"
@@ -388,8 +371,8 @@ const Page = () => {
         <div className="col-span-2">
           <DragDropUpload
             acceptedFormats={{
-              "image/*": [".jpeg", ".png", ".jpg", ".gif"],
-              "application/*": [".pdf"],
+              'image/*': ['.jpeg', '.png', '.jpg', '.gif'],
+              'application/*': ['.pdf'],
             }}
             isMultiple={true}
             label="Proof Document"
@@ -403,7 +386,8 @@ const Page = () => {
           radius="full"
           size="lg"
           className="font-medium bg-brand-olive-green border-brand-olive-green text-white"
-          onClick={handleSubmit}>
+          onClick={handleSubmit}
+        >
           Send For KYC
         </Button>
       </div>

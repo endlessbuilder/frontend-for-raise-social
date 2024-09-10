@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React from "react";
-import CampaignCard from "../../components/ui/campainCard";
-import { Button } from "@nextui-org/button";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { SERVER_IP } from "../../utils/constants";
+import React from 'react';
+import CampaignCard from '../../components/ui/campainCard';
+import { Button } from '@nextui-org/button';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { SERVER_IP } from '../../utils/constants';
 
 const FundraisersSection = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -16,13 +16,11 @@ const FundraisersSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${SERVER_IP}/api/campaign`,
-        );
+        const response = await axios.get(`${SERVER_IP}/api/campaign`);
         setCampaigns(response.data.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
         setError(error);
         setLoading(false);
       }
@@ -33,15 +31,15 @@ const FundraisersSection = () => {
   function getValueBasedOnIndex(i) {
     switch (i % 4) {
       case 0:
-        return "v1";
+        return 'v1';
       case 1:
-        return "v2";
+        return 'v2';
       case 2:
-        return "v5";
+        return 'v5';
       case 3:
-        return "v4";
+        return 'v4';
       default:
-        return "v1";
+        return 'v1';
     }
   }
   if (loading) {
@@ -63,7 +61,8 @@ const FundraisersSection = () => {
             variant="bordered"
             radius="full"
             size="lg"
-            className="mb-4 font-medium text-brand-olive-green border-brand-olive-green xl:py-6 xl:px-7">
+            className="mb-4 font-medium text-brand-olive-green border-brand-olive-green xl:py-6 xl:px-7"
+          >
             Browse All Campaigns
           </Button>
         </Link>

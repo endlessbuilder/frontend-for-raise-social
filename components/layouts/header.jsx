@@ -1,6 +1,5 @@
-"use client";
-import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
+'use client';
+import { Link } from '@nextui-org/link';
 import {
   Navbar,
   NavbarBrand,
@@ -9,42 +8,42 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-} from "@nextui-org/navbar";
-import { useMotionValueEvent } from "framer-motion";
-import { useScroll } from "framer-motion";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+} from '@nextui-org/navbar';
+import { useMotionValueEvent } from 'framer-motion';
+import { useScroll } from 'framer-motion';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
-  const token = localStorage.getItem("authToken");
-  
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  const token = localStorage.getItem('authToken');
+
+  // const menuItems = [
+  //   'Profile',
+  //   'Dashboard',
+  //   'Activity',
+  //   'Analytics',
+  //   'System',
+  //   'Deployments',
+  //   'My Settings',
+  //   'Team Settings',
+  //   'Help & Feedback',
+  //   'Log Out',
+  // ];
 
   const menus = [
-    { label: "About", href: "/about" },
-    { label: "Campaigns", href: "/campaigns" },
-    { label: "Forum", href: "/forum" },
-    { label: "Contact", href: "/contact" },
-    { label: "Pricing", href: "/pricing" },
+    { label: 'About', href: '/about' },
+    { label: 'Campaigns', href: '/campaigns' },
+    { label: 'Forum', href: '/forum' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'Pricing', href: '/pricing' },
   ];
 
-  const isGreenDefault = pathname !== "/";
+  const isGreenDefault = pathname !== '/';
 
   const [isNavTransparent, setIsNavTransparent] = useState(
     isGreenDefault ? false : true,
@@ -52,7 +51,7 @@ const Header = () => {
 
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, 'change', (latest) => {
     if (latest > 350) {
       setIsNavTransparent(false);
     } else {
@@ -63,7 +62,6 @@ const Header = () => {
   });
 
   useEffect(() => {
-
     if (isGreenDefault) {
       setIsNavTransparent(false);
     }
@@ -72,15 +70,16 @@ const Header = () => {
   return (
     <Navbar
       classNames={{
-        menu: "top-[100px]",
-        wrapper: "bg-transparent",
+        menu: 'top-[100px]',
+        wrapper: 'bg-transparent',
       }}
       onMenuOpenChange={setIsMenuOpen}
       maxWidth="full"
-      className={`h-[100px] duration-500 fixed ${isNavTransparent ? "bg-transparent backdrop-filter-none" : "bg-brand-olive-green"}`}>
+      className={`h-[100px] duration-500 fixed ${isNavTransparent ? 'bg-transparent backdrop-filter-none' : 'bg-brand-olive-green'}`}
+    >
       <NavbarContent>
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           className="sm:hidden"
         />
         <NavbarBrand className="gap-4">
@@ -98,7 +97,8 @@ const Header = () => {
             <Link
               color="foreground"
               href={item.href}
-              className="font-body font-bold text-lg text-white">
+              className="font-body font-bold text-lg text-white"
+            >
               {item.label}
             </Link>
           </NavbarItem>
@@ -109,14 +109,16 @@ const Header = () => {
             <Link
               color="foreground"
               href="/login"
-              className="font-body font-bold text-lg text-white">
+              className="font-body font-bold text-lg text-white"
+            >
               Login
             </Link>
           ) : (
             <Link
               color="foreground"
               href="/account"
-              className="font-body font-bold text-lg text-white">
+              className="font-body font-bold text-lg text-white"
+            >
               Account
             </Link>
           )}

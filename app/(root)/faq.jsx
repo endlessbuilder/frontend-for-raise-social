@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 const FaqItem = ({ question, answer }) => (
   <div className={`bg-brand-eucalyptus p-8 h-full`}>
@@ -12,30 +12,36 @@ const FaqItem = ({ question, answer }) => (
 function FAQComponent() {
   const faqData = [
     {
-      question: "How to start a campaign?",
-      answer: "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources.",
-      bgColor: "bg-yellow-200"
+      question: 'How to start a campaign?',
+      answer:
+        "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources.",
+      bgColor: 'bg-yellow-200',
     },
     {
-      question: "How much funds can be raised?",
-      answer: "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources."
+      question: 'How much funds can be raised?',
+      answer:
+        "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources.",
     },
     {
       question: "Can I donate even if I don't have an account?",
-      answer: "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources."
+      answer:
+        "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources.",
     },
     {
-      question: "How to verify my account?",
-      answer: "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources."
+      question: 'How to verify my account?',
+      answer:
+        "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources.",
     },
     {
-      question: "Can I promote my campaign?",
-      answer: "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources."
+      question: 'Can I promote my campaign?',
+      answer:
+        "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources.",
     },
     {
-      question: "What if I lost my account credentials?",
-      answer: "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources."
-    }
+      question: 'What if I lost my account credentials?',
+      answer:
+        "We need to socialize the comms with the wider stakeholder community guerrilla marketing, but reinvent the wheel strategic high-level 30,000 ft view, for going forward. Flesh that out the horse is out of the barn. We need to button up our approach who's responsible for the ask for this request? waste of resources.",
+    },
   ];
 
   return (

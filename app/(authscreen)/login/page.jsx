@@ -1,63 +1,63 @@
-"use client";
+'use client';
 
-import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
-import Link from "next/link";
-import React, { useState } from "react";
-import { SERVER_IP } from "../../../utils/constants";
+import { Button } from '@nextui-org/button';
+import { Input } from '@nextui-org/input';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { SERVER_IP } from '../../../utils/constants';
 
 const Page = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null); 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError(null); // Clear previous errors
-  
+
     try {
       const response = await fetch(`${SERVER_IP}/api/login`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email,
           password,
         }),
       });
-  
+
       // Check if response is JSON
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
         const data = await response.json();
-  
+
         // If response is not OK, throw error
         if (!response.ok) {
-          throw new Error(data.message || "Something went wrong");
+          throw new Error(data.message || 'Something went wrong');
         }
-  
+
         // Handle successful login
-        console.log("Login successful", data);
-  
-        // Save user info and token in localStorage
-        localStorage.setItem("userID", data.id);
-        localStorage.setItem("userName", data.fullName);
-        localStorage.setItem("userEmail", data.email);
-        localStorage.setItem("authToken", data.token);
-  
-        // Redirect to campaigns page after successful login
-        window.location.href = "/campaigns";
+        console.log('Login successful', data);
+
+        if (typeof window !== 'undefined') {
+          // Save user info and token in localStorage
+          localStorage.setItem('userID', data.id);
+          localStorage.setItem('userName', data.fullName);
+          localStorage.setItem('userEmail', data.email);
+          localStorage.setItem('authToken', data.token);
+          // Redirect to campaigns page after successful login
+          window.location.href = '/campaigns';
+        }
       } else {
         // Handle unexpected content-type
-        throw new Error("Unexpected response format");
+        throw new Error('Unexpected response format');
       }
     } catch (err) {
-      console.error("Login error:", err);
-      setError(err.message || "Login failed");
+      console.error('Login error:', err);
+      setError(err.message || 'Login failed');
     }
   };
-  
 
   return (
     <div className="overflow-hidden p-8 lg:py-14 lg:pr-7 lg:pl-20 bg-brand-ivory max-md:px-5 lg:h-screen">
@@ -69,7 +69,7 @@ const Page = () => {
                 loading="lazy"
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/2dc00ade95da09b368c1fef8bf0b3dc9966c324e821b245532ac1b2f21e73e3d?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
                 className="object-contain shrink-0 rounded-lg aspect-square w-[60px]"
-                alt='lazy'
+                alt="lazy"
               />
               <div className="self-start mt-2.5 basis-auto max-md:text-4xl">
                 Raise.
@@ -90,7 +90,7 @@ const Page = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 classNames={{
-                  inputWrapper: "border border-brand-dark",
+                  inputWrapper: 'border border-brand-dark',
                 }}
               />
               <Input
@@ -103,7 +103,7 @@ const Page = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 classNames={{
-                  inputWrapper: "border border-brand-dark",
+                  inputWrapper: 'border border-brand-dark',
                 }}
               />
               {error && <p className="text-red-500 mb-5">{error}</p>}
@@ -114,7 +114,8 @@ const Page = () => {
                 size="lg"
                 className="bg-brand-lemon-yellow py-7 border border-brand-dark w-full font-bold"
                 variant="solid"
-                type="submit">
+                type="submit"
+              >
                 Submit
               </Button>
             </form>
@@ -128,12 +129,13 @@ const Page = () => {
             <Button
               size="lg"
               className="bg-white py-7 border border-brand-dark w-full font-bold"
-              variant="solid">
+              variant="solid"
+            >
               <img
                 loading="lazy"
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/4afcf1048ae3f4852061b80f8ea5990ac5796d08b00ed5201f740025245bf9e8?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
                 className="object-contain w-5 aspect-square"
-                alt='lazy'
+                alt="lazy"
               />
               Continue with Google
             </Button>
@@ -149,7 +151,7 @@ const Page = () => {
               loading="lazy"
               srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/a2846126ea60dff5330f24631ee622ef87f7eb9be682a41444620bdd1e674324?placeholderIfAbsent=true&apiKey=766be46e9945400fb0d82367510acded"
               className="object-cover absolute inset-0 size-full"
-              alt='lazy'
+              alt="lazy"
             />
             <div className="min-h-[450px] flex overflow-hidden relative flex-col px-11 pb-11 rounded-3xl max-md:px-5 max-md:max-w-full h-full justify-end">
               <div className="max-md:max-w-full">

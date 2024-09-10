@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const layout = ({ children }) => {
-    return (
-        <div className='pt-[140px] px-8'>{children}</div>
-    )
-}
+  return <div className="pt-[140px] px-8">{children}</div>;
+};
 
-export default layout
+export default layout;

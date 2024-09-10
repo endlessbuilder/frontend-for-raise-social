@@ -1,14 +1,11 @@
-import "@/styles/globals.css";
-import { Metadata, Viewport } from "next";
-import { Link } from "@nextui-org/link";
-import clsx from "clsx";
+import '@/styles/globals.css';
+import { Metadata } from 'next';
+import clsx from 'clsx';
 
-import { Providers } from "./providers";
+import { Providers } from './providers';
 
-import { siteConfig } from "@/config/site";
-import { fontHeading, fontBody } from "@/config/fonts";
-
-
+import { siteConfig } from '@/config/site';
+import { fontHeading, fontBody } from '@/config/fonts';
 
 export const metadata: Metadata = {
   title: {
@@ -17,7 +14,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.ico",
+    icon: '/favicon.ico',
   },
 };
 
@@ -31,14 +28,12 @@ export default function RootLayout({
       <head className="light" />
       <body
         className={clsx(
-          "min-h-screen bg-background font-body",
+          'min-h-screen bg-background font-body',
           fontBody.variable,
           fontHeading.variable,
         )}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

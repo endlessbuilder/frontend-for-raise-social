@@ -1,5 +1,4 @@
-import localFont from 'next/font/local'
-
+import localFont from 'next/font/local';
 
 export const fontHeading = localFont({
   src: [
@@ -17,11 +16,10 @@ export const fontHeading = localFont({
       path: '../public/font/c3.otf',
       weight: '100',
       style: 'light',
-    }
+    },
   ],
-  variable: "--font-heading",
-})
-
+  variable: '--font-heading',
+});
 
 export const fontBody = localFont({
   src: [
@@ -44,10 +42,7 @@ export const fontBody = localFont({
       path: '../public/font/HelveticaNeueLight.otf',
       weight: '100',
       style: 'light',
-    }
+    },
   ],
-  variable: "--font-body",
-})
-
-
-
+  variable: '--font-body',
+});
