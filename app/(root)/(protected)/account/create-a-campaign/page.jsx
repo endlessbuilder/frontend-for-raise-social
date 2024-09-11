@@ -16,8 +16,8 @@ require('@coral-xyz/anchor');
 console.log('>>> connected to ', TESTNET);
 // const connection = new Connection(TESTNET);
 
-function getClientSideStorage(key) {
-  let value = undefined;
+function GetClientSideStorage(key) {
+  let value = '';
   useEffect(() => {
     value = localStorage.getItem(key);
   }, [key]);
@@ -44,7 +44,7 @@ const Page = () => {
   // const [balance, setBalance] = useState(null);
 
   // const userID = window.localStorage.getItem('userID');
-  const userID = getClientSideStorage('userID');
+  const userID = GetClientSideStorage('userID');
 
   setDescription('');
 

@@ -2,17 +2,18 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import { useEffect } from 'react';
 import { SERVER_IP } from '../../utils/constants';
 
-function getClientSideStorage(key) {
-  let value = undefined;
+function GetClientSideStorage(key) {
+  let value = '';
   useEffect(() => {
     value = localStorage.getItem(key);
   }, [key]);
   return value;
 }
 
-function clearClientSideStorage() {
+function ClearClientSideStorage() {
   useEffect(() => {
     localStorage.clear();
   }, []);
@@ -31,14 +32,14 @@ const Sidebar = ({ navItems }) => {
           },
           body: JSON.stringify({
             // email: window.localStorage.getItem('userEmail')
-            email: getClientSideStorage('userEmail')
+            email: GetClientSideStorage('userEmail')
           })
         });
 
         if (response.ok) {
           window.location.href = '/login';
           // window.localStorage.clear();
-          clearClientSideStorage();
+          ClearClientSideStorage();
         } else {
           console.error('Failed to logout');
         }

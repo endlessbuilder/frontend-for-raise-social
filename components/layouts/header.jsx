@@ -17,8 +17,8 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-function getClientSideStorage(key) {
-  let value = undefined;
+function GetClientSideStorage(key) {
+  let value = '';
   useEffect(() => {
     value = localStorage.getItem(key);
   }, [key]);
@@ -29,7 +29,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
   // const token = window.localStorage.getItem('authToken');
-  const token = getClientSideStorage('authToken');
+  const token = GetClientSideStorage('authToken');
 
   // const menuItems = [
   //   'Profile',

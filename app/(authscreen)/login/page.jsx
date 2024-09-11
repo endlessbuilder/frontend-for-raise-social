@@ -3,10 +3,10 @@
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SERVER_IP } from '../../../utils/constants';
 
-function useClientSideStorage(key, defaultValue) {
+function UseClientSideStorage(key, defaultValue) {
   useEffect(() => {
     const value = localStorage.getItem(key) || defaultValue;
     localStorage.setItem(key, value);
@@ -57,10 +57,10 @@ const Page = () => {
         //   window.location.href = '/campaigns';
         // }
 
-        useClientSideStorage('userID', data.id);
-        useClientSideStorage('userName', data.fullName);
-        useClientSideStorage('userEmail', data.email);
-        useClientSideStorage('authToken', data.token);
+        UseClientSideStorage('userID', data.id);
+        UseClientSideStorage('userName', data.fullName);
+        UseClientSideStorage('userEmail', data.email);
+        UseClientSideStorage('authToken', data.token);
         
       } else {
         // Handle unexpected content-type
