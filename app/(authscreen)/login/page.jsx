@@ -6,6 +6,13 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { SERVER_IP } from '../../../utils/constants';
 
+function useClientSideStorage(key, defaultValue) {
+  useEffect(() => {
+    const value = localStorage.getItem(key) || defaultValue;
+    localStorage.setItem(key, value);
+  }, [key, defaultValue]);
+}
+
 const Page = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,19 +47,26 @@ const Page = () => {
         // Handle successful login
         console.log('Login successful', data);
 
-        if (typeof window !== 'undefined') {
-          // Save user info and token in localStorage
-          localStorage.setItem('userID', data.id);
-          localStorage.setItem('userName', data.fullName);
-          localStorage.setItem('userEmail', data.email);
-          localStorage.setItem('authToken', data.token);
-          // Redirect to campaigns page after successful login
-          window.location.href = '/campaigns';
-        }
+        // if (typeof window !== 'undefined') {
+        //   // Save user info and token in window.localStorage
+        //   window.localStorage.setItem('userID', data.id);
+        //   window.localStorage.setItem('userName', data.fullName);
+        //   window.localStorage.setItem('userEmail', data.email);
+        //   window.localStorage.setItem('authToken', data.token);
+        //   // Redirect to campaigns page after successful login
+        //   window.location.href = '/campaigns';
+        // }
+
+        useClientSideStorage('userID', data.id);
+        useClientSideStorage('userName', data.fullName);
+        useClientSideStorage('userEmail', data.email);
+        useClientSideStorage('authToken', data.token);
+        
       } else {
         // Handle unexpected content-type
         throw new Error('Unexpected response format');
       }
+
     } catch (err) {
       console.error('Login error:', err);
       setError(err.message || 'Login failed');

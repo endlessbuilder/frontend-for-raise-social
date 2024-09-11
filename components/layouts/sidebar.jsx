@@ -4,6 +4,20 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import { SERVER_IP } from '../../utils/constants';
 
+function getClientSideStorage(key) {
+  let value = undefined;
+  useEffect(() => {
+    value = localStorage.getItem(key);
+  }, [key]);
+  return value;
+}
+
+function clearClientSideStorage() {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+}
+
 const Sidebar = ({ navItems }) => {
   const pathname = usePathname();
 
@@ -16,13 +30,15 @@ const Sidebar = ({ navItems }) => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            email: localStorage.getItem('userEmail')
+            // email: window.localStorage.getItem('userEmail')
+            email: getClientSideStorage('userEmail')
           })
         });
 
         if (response.ok) {
           window.location.href = '/login';
-          localStorage.clear();
+          // window.localStorage.clear();
+          clearClientSideStorage();
         } else {
           console.error('Failed to logout');
         }
@@ -39,8 +55,7 @@ const Sidebar = ({ navItems }) => {
           <Link
             href={item.link}
             key={i}
-            className={`flex gap-2.5 items-center ${item.link === pathname ? 'opacity-100' : 'opacity-70'}`}
-          >
+            className={`flex gap-2.5 items-center ${item.link === pathname ? 'opacity-100' : 'opacity-70'}`}>
             {pathname === item.link && (
               <div className="w-3 h-3 rounded-full bg-brand-dark mb-2"></div>
             )}
@@ -57,8 +72,7 @@ const Sidebar = ({ navItems }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 mb-2"
-        >
+          className="w-6 h-6 mb-2">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"

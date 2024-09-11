@@ -16,6 +16,14 @@ require('@coral-xyz/anchor');
 console.log('>>> connected to ', TESTNET);
 // const connection = new Connection(TESTNET);
 
+function getClientSideStorage(key) {
+  let value = undefined;
+  useEffect(() => {
+    value = localStorage.getItem(key);
+  }, [key]);
+  return value;
+}
+
 const Page = () => {
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -35,7 +43,8 @@ const Page = () => {
   const [wallet, setWallet] = useState(null);
   // const [balance, setBalance] = useState(null);
 
-  const userID = localStorage.getItem('userID');
+  // const userID = window.localStorage.getItem('userID');
+  const userID = getClientSideStorage('userID');
 
   setDescription('');
 
@@ -315,8 +324,7 @@ const Page = () => {
             radius="sm"
             onSelectionChange={(key) => {
               setLocation(key);
-            }}
-          >
+            }}>
             {locations.map((item) => (
               <AutocompleteItem key={item._id} value={item.name}>
                 {item.name}
@@ -329,8 +337,7 @@ const Page = () => {
             radius="sm"
             onSelectionChange={(key) => {
               setCategory(key);
-            }}
-          >
+            }}>
             {categories.map((item) => (
               <AutocompleteItem key={item._id} value={item.name}>
                 {item.name}
@@ -376,8 +383,7 @@ const Page = () => {
           radius="full"
           size="lg"
           className="font-medium bg-brand-olive-green border-brand-olive-green text-white"
-          onClick={handleSubmit}
-        >
+          onClick={handleSubmit}>
           Send For KYC
         </Button>
       </div>
