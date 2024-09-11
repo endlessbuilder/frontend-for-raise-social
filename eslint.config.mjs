@@ -1,11 +1,70 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import pluginReact from "eslint-plugin-react";
+import react from 'eslint-plugin-react';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import js from '@eslint/js';
+import { FlatCompat } from '@eslint/eslintrc';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all
+});
 
 export default [
-  {files: ["**/*.{js,mjs,cjs,jsx}"]},
-  {languageOptions: { globals: {...globals.browser, ...globals.node} }},
-  pluginJs.configs.recommended,
-  pluginReact.configs.flat.recommended,
+  {
+    ignores: [
+      '.now/*',
+      '**/*.css',
+      '**/.changeset',
+      '**/dist',
+      'esm/*',
+      'public/*',
+      'tests/*',
+      'scripts/*',
+      '**/*.config.js',
+      '**/.DS_Store',
+      '**/node_modules',
+      '**/coverage',
+      '**/.next',
+      '**/build',
+      '!**/.commitlintrc.cjs',
+      '!**/.lintstagedrc.cjs',
+      '!**/jest.config.js',
+      '!**/plopfile.js',
+      '!**/react-shim.js',
+      '!**/tsup.config.ts'
+    ]
+  },
+  ...compat.extends(
+    'next',
+    'next/core-web-vitals',
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier'
+  ),
+  {
+    plugins: {
+      react,
+      '@typescript-eslint': typescriptEslint
+    },
+
+    languageOptions: {
+      ecmaVersion: 2021,
+      sourceType: 'module'
+    },
+
+    settings: {
+      react: {
+        version: 'detect'
+      }
+    },
+
+    rules: {
+      'react/prop-types': 'off'
+    }
+  }
 ];

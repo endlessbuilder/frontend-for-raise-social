@@ -3,13 +3,13 @@
 import * as React from 'react';
 import { OTPInput, OTPInputContext } from 'input-otp';
 import { cn } from '@/lib/utils';
-// import { Dot } from "lucide-react"
-
-// import { cn } from "@/lib/utils"
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,
-  React.ComponentPropsWithoutRef<typeof OTPInput>
+  React.ComponentPropsWithoutRef<typeof OTPInput> & {
+    className?: string;
+    containerClassName?: string;
+  }
 >(({ className, containerClassName, ...props }, ref) => (
   <OTPInput
     ref={ref}
@@ -25,7 +25,7 @@ InputOTP.displayName = 'InputOTP';
 
 const InputOTPGroup = React.forwardRef<
   React.ElementRef<'div'>,
-  React.ComponentPropsWithoutRef<'div'>
+  React.ComponentPropsWithoutRef<'div'> & { className?: string }
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn('flex items-center', className)} {...props} />
 ));
@@ -33,7 +33,10 @@ InputOTPGroup.displayName = 'InputOTPGroup';
 
 const InputOTPSlot = React.forwardRef<
   React.ElementRef<'div'>,
-  React.ComponentPropsWithoutRef<'div'> & { index: number }
+  React.ComponentPropsWithoutRef<'div'> & {
+    className?: string;
+    index: number;
+  }
 >(({ index, className, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext);
   const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];
