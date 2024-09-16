@@ -1,3 +1,4 @@
+import "@/styles/globals.css";
 import React from 'react'; // Import React to fix the 'React' must be in scope when using JSX error
 import clsx from 'clsx';
 
