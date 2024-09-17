@@ -91,7 +91,8 @@ const DonateNowComp = ({ isSubmitted, setSubmitted }) => {
   };
 
   const handleDonate = async (e) => {
-    console.log('>>> --- handleDonate ---');
+    console.log('>>> --- handleDonate ---')
+    await handleConnectWallet()
     e.preventDefault();
     await updateBalance(wallet, connection); // Use state connection
     if (!wallet || !amount) return;
