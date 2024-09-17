@@ -1,6 +1,6 @@
 // server_ip constant
-export const SERVER_IP = process.env.REACT_APP_SERVER_IP || 'http://localhost:5005';
-export const FSERVER_IP = process.env.REACT_APP_FSERVER_IP || 'http://localhost:5004';
+export const SERVER_IP = process.env.REACT_APP_SERVER_IP || 'backend-for-raise-social.vercel.app:5005';
+export const FSERVER_IP = process.env.REACT_APP_FSERVER_IP || 'backend-for-raise-social.vercel.app:5004';
 
 export const LOCALNET = 'http://localhost:8899';
 export const DEVNET = 'https://api.devnet.solana.com';
