@@ -13,6 +13,7 @@ import { SERVER_IP } from '../../utils/constants';
 const Page = () => {
   const [campaigns, setCampaigns] = useState([]);
   const fetchData = async () => {
+    console.log(`>>> axios get ${SERVER_IP}/api/campaign`)
     try {
       const campaignsRes = await axios.get(`${SERVER_IP}/api/campaign`);
       // const campaignsRes = await Promise(
