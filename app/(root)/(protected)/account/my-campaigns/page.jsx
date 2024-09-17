@@ -45,12 +45,10 @@ const columns = [
 
 const CampaignDataTable = () => {
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState(new Set(['All']));
   const [selectedKycStatus, setSelectedKycStatus] = useState(new Set(['All']));
-
-  setRowsPerPage(10);
 
   const filteredData = useMemo(() => {
     let filtered = [...mockData];

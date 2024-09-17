@@ -46,7 +46,9 @@ const Page = () => {
   // const userID = window.localStorage.getItem('userID');
   const userID = GetClientSideStorage('userID');
 
-  setDescription('');
+  useEffect(() => {
+    setDescription('');
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -146,23 +148,15 @@ const Page = () => {
       throw error;
     }
   };
-  const campaignImgReader = typeof window !== 'undefined' ? new FileReader() : null;
-  campaignImgReader.onloadend = function () {
-    // const base64String = campaignImgReader.result.split(', ')[1]; // Remove data:image/...;base64, part
-    // console.log(campaignImgReader.result);
-    setCamImgFile(campaignImgReader.result);
-  };
-  // const proofDocumentReader = new FileReader();
-  // proofDocumentReader.onloadend = function() {
-  //   // const base64String = proofDocumentReader.result.split(', ')[1]; // Remove data:image/...;base64, part
-  //   console.log(proofDocumentReader.result);
-  // };
-
+  // Function to handle the campaign image upload
   const handleCamImg = (img) => {
     setCampaignImage(img);
-    console.log(img);
-    if (img != undefined) {
-      campaignImgReader.readAsDataURL(img);
+    if (typeof window !== 'undefined' && img != undefined) {
+      const campaignImgReader = new FileReader();
+      campaignImgReader.onloadend = function () {
+        setCamImgFile(campaignImgReader.result);
+      };
+      campaignImgReader.readAsDataURL(img); // Trigger onloadend
     }
   };
 

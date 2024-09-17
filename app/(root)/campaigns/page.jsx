@@ -27,6 +27,7 @@ const Campaigns = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log(">>> server IP = ", SERVER_IP)
         const [categoriesRes, locationsRes, campaignsRes] = await Promise.all([
           axios.get(`${SERVER_IP}/api/category`),
           axios.get(`${SERVER_IP}/api/location`),
