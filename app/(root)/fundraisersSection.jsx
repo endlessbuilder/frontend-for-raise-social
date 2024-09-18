@@ -72,7 +72,8 @@ const FundraisersSection = () => {
           campaigns.map((campaign, i) => (
             <Link href={`/campaigns/${campaign._id}`} key={campaign._id}>
               <CampaignCard
-                imgUrl={campaign.file}
+                // imgUrl={campaign.file}
+                imgUrl="./images/tiger.png"
                 title={campaign.title}
                 amount={campaign.totalAmount}
                 type={getValueBasedOnIndex(i)}
