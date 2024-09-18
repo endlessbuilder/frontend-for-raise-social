@@ -76,8 +76,8 @@ function CampaignDetailsComponent({ campaignData }) {
             </div>
           </div>
           <img
-            src={campaignData.file}
-            // src="/images/tiger.png"
+            // src={campaignData.file}
+            src="/images/tiger.png"
             alt="Campaign"
             className="w-full mt-8 object-cover max-h-[450px]"
           />
